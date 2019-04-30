@@ -12,6 +12,10 @@ public class Food extends Sprite {  //TODO the circle could become a image or so
         this.paint = paint;
     }
 
+    /**
+     * {@inheritDoc}
+     * In this case the render will draw a rectangle
+     */
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(paint);

@@ -12,6 +12,10 @@ public class SnakeHead extends Sprite { //TODO the circle could become a image o
         this.paint = paint;
     }
 
+    /**
+     * {@inheritDoc}
+     * In this case the render method will draw a circle.
+     */
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(paint);

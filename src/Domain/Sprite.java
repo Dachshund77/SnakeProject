@@ -2,6 +2,9 @@ package Domain;
 
 import javafx.geometry.Rectangle2D;
 
+/**
+ * Abstract class to hold common implementation for all Sprites.
+ */
 public abstract class Sprite implements Sprites{
 
     double xPosition;
@@ -32,7 +35,7 @@ public abstract class Sprite implements Sprites{
     }
 
     @Override
-    public boolean intersects(Sprite s) {
+    public boolean intersects(Sprites s) {
         return s.getBoundary().intersects( this.getBoundary() );
     }
 }

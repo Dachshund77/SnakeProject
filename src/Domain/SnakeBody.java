@@ -14,15 +14,27 @@ public class SnakeBody extends Sprite { //TODO slightly in question how we remov
         this.lifetime = lifetime;
     }
 
+    /**
+     * {@inheritDoc}
+     * In this object we will also decrement the lifetime of this object.
+     */
     @Override
     public void update(double time) {
         super.update(time);
         lifetime -= time;
     }
 
+    /**
+     * {@inheritDoc}
+     * In this case it will draw an Oval.
+     */
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(paint);
         gc.fillOval(xPosition,yPosition,width,height);
+    }
+
+    public double getLifetime() {
+        return lifetime;
     }
 }
