@@ -18,10 +18,11 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class Controller {
 
+    @FXML public Canvas backGroundCanvas;
+    @FXML public Canvas foodCanvas;
+    @FXML public Canvas snakeCanvas;
     @FXML
-    Label labelScore;
-    @FXML
-    Button newGame;
+    Label scoreCountLabel;
     @FXML
     Canvas canvas;
     public int posX;
