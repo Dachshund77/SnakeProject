@@ -17,12 +17,21 @@ public class Controller {
     Button newGame;
     @FXML
     Canvas canvas;
+    public int posX;
+    public int posY;
 
 
     public void initialize(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.strokeOval(25,25,25,25);
         gc.strokeOval( 25,50,25,25);
+
+
+    }
+
+    public void player(){
+        this.posX = 25;
+        this.posY = 25;
 
     }
 
