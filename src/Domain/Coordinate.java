@@ -1,10 +1,10 @@
-package sample;
+package Domain;
 
 public class Coordinate {
 
     int x, y;
 
-    Coordinate(int x, int y){
+    Coordinate(int x, int y){ //TODO we might delete this class, discuss tommororw
 
         this.x = x;
         this.y = y;

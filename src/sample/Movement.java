@@ -1,9 +1,11 @@
 package sample;
 
+import Application.Controller;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Movement extends Controller implements KeyListener {
+public class Movement extends Controller implements KeyListener { //TODO can this class be cleaned up?
 
    public enum Direction{
       UP,

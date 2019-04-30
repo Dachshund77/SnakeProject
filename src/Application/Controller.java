@@ -1,19 +1,10 @@
-package sample;
+package Application;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.util.Duration;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 
 public class Controller {
