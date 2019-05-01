@@ -37,7 +37,7 @@ public class Controller {
      * @param event the event that starts this method.
      */
     public void handleNewGame(ActionEvent event) {
-        gameModel = new GameModel(new BoardModel(100,100));
+        gameModel = new GameModel(new BoardModel(gameCanvas.getHeight(),gameCanvas.getWidth()));
         startGameLoop();
     }
 
@@ -60,7 +60,7 @@ public class Controller {
 
                 ArrayList<Sprites> spritesToDraw = gameModel.getBoardModel().getAllSprites();
                 for (Sprites sprite : spritesToDraw) {
-                    sprite.render(gameCanvasGC); //TODO need a scale for model to canvas scaling
+                    sprite.render(gameCanvasGC); //TODO need a scale for model to canvas scaling... mb
                 }
             }
         }.start();
@@ -68,7 +68,7 @@ public class Controller {
 
 
     @FXML
-    public void handleUserInput(KeyEvent keyEvent) { //TODO this is not working at all...
+    public void handleUserInput(KeyEvent keyEvent) {
         System.out.println("fire event!");
         KeyCode keyPressed = keyEvent.getCode();
         switch (keyPressed){

@@ -20,6 +20,7 @@ public class SnakeHead extends Sprite { //TODO the circle could become a image o
     public void render(GraphicsContext gc) {
         gc.setFill(paint);
         gc.fillOval(xPosition, yPosition,width,height);
+
     }
 
 

@@ -1,5 +1,6 @@
 package Domain.Board;
 
+import Domain.Sprite.SnakeHead;
 import Domain.Sprite.Sprites;
 
 import java.util.ArrayList;
@@ -22,4 +23,10 @@ public interface BoardModels {
      * @return All Drawable Sprites on this Board.
      */
     ArrayList<Sprites> getAllSprites();
+
+    /**
+     * Method that gets this board player object, the snakeHead.
+     * @return the players snakeHead
+     */
+    SnakeHead getSnakeHead();
 }
