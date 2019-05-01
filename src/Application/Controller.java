@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 
 public class Controller {
 
-    @FXML public Canvas backGroundCanvas; //TODO if everything is redrawn anyway, whats the point of different layers
+    @FXML public Canvas backGroundCanvas; //TODO clear rect
     @FXML public Canvas foodCanvas;
     @FXML public Canvas snakeCanvas;
     @FXML public Label scoreCountLabel;

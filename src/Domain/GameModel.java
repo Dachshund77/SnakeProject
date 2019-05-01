@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameModel {
     BoardModel boardModel;
-    IntegerProperty scoreProperty = new SimpleIntegerProperty(this,"Score",0);
+    IntegerProperty scoreProperty = new SimpleIntegerProperty(this,"Score",0); //TODO naming convention
 
     public GameModel() {
         this.boardModel = boardModel; //TODO here we need to make new

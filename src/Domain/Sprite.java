@@ -10,8 +10,8 @@ public abstract class Sprite implements Sprites{
     double xPosition;
     double yPosition;
 
-    private double xVelocity;
-    private double yVelocity;
+     double xVelocity;
+     double yVelocity;
 
     double height;
     double width;
