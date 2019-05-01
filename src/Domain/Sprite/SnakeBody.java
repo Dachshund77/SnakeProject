@@ -1,9 +1,9 @@
-package Domain;
+package Domain.Sprite;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class SnakeBody extends Sprite { //TODO slightly in question how we remove the body effiecently
+public class SnakeBody extends Sprite {
 
     private Color paint;
     private double lifetime;

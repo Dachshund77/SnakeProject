@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Sprite;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -21,4 +21,6 @@ public class SnakeHead extends Sprite { //TODO the circle could become a image o
         gc.setFill(paint);
         gc.fillOval(xPosition, yPosition,width,height);
     }
+
+
 }

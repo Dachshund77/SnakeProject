@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Sprite;
 
 import javafx.geometry.Rectangle2D;
 
@@ -10,8 +10,8 @@ public abstract class Sprite implements Sprites{
     double xPosition;
     double yPosition;
 
-     double xVelocity;
-     double yVelocity;
+    double xVelocity;
+    double yVelocity;
 
     double height;
     double width;
@@ -37,5 +37,21 @@ public abstract class Sprite implements Sprites{
     @Override
     public boolean intersects(Sprites s) {
         return s.getBoundary().intersects( this.getBoundary() );
+    }
+
+    public double getxPosition() {
+        return xPosition;
+    }
+
+    public double getyPosition() {
+        return yPosition;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
     }
 }
