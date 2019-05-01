@@ -8,6 +8,9 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+/**
+ * Actual implementation of the Board state. Note that the models height and width can differ from the canvas where it is displayed.
+ */
 public class BoardModel implements BoardModels { //TODO possible change the fields to take sprite interface
 
     //Double[][] coordinates; //TODO storing stuff in 2d array might be obsolete

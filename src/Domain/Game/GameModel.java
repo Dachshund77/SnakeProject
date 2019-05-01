@@ -4,6 +4,10 @@ import Domain.Board.BoardModels;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ * Actual iimplementation of the GameModels interface.
+ * This method keep track of score and if the game is over.
+ */
 public class GameModel implements GameModels { //TODO this class might also be in charge of playing sounds?
 
     private BoardModels boardModel;

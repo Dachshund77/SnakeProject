@@ -6,7 +6,9 @@ import Domain.Game.GameModels;
 import Domain.Sprite.Sprites;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -15,7 +17,11 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 
-
+/**
+ * Main Controller for the Snake game. Note that the controller is just the top level and any game or board logic is done by the models.
+ * @see GameModels
+ * @see Domain.Board.BoardModels
+ */
 public class Controller {
 
     @FXML public Canvas backGroundCanvas;
@@ -26,11 +32,18 @@ public class Controller {
     private GameModels gameModel;
     private KeyCode lastKeyPressed;
 
+    /**
+     * Method to start and attach a new gameModels and BordModels to to the Scene.
+     * @param event the event that starts this method.
+     */
     public void handleNewGame(ActionEvent event) {
         gameModel = new GameModel(new BoardModel(100,100));
         startGameLoop();
     }
 
+    /**
+     * Method that initializes the gameLoop
+     */
     private void startGameLoop(){
         System.out.println("Starting new Game Loop"); //TODO Remove before release
         //Init needed values
@@ -53,7 +66,9 @@ public class Controller {
         }.start();
     }
 
-    public void handleUserInput(KeyEvent keyEvent) {
+
+    @FXML
+    public void handleUserInput(KeyEvent keyEvent) { //TODO this is not working at all...
         System.out.println("fire event!");
         KeyCode keyPressed = keyEvent.getCode();
         switch (keyPressed){
