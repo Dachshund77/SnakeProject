@@ -4,23 +4,30 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameModel implements GameModels {
-    BoardModel boardModel;
-    IntegerProperty scoreProperty = new SimpleIntegerProperty(this,"Score",0); //TODO naming convention
+    BoardModels boardModel;
+    IntegerProperty score = new SimpleIntegerProperty(this,"Score",0);
 
     public GameModel() {
         this.boardModel = boardModel; //TODO here we need to make new
-        this.setScoreProperty(0);
+        this.setScore(0);
     }
 
-    public int getScoreProperty() { //TODO naming convention question, mb call this just getScore
-        return scoreProperty.get();
+    @Override
+    public void updateGameState(long currentNanoTime) {
+        //update board
+
+        //get any collision with the head
     }
 
-    public IntegerProperty scorePropertyProperty() { //TODO naming convention
-        return scoreProperty;
+    public int getScore() { //TODO naming convention question, mb call this just getScore
+        return score.get();
     }
 
-    public void setScoreProperty(int scoreProperty) {
-        this.scoreProperty.set(scoreProperty);
+    public IntegerProperty scoreProperty() { //TODO naming convention
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score.set(score);
     }
 }

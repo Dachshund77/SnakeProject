@@ -12,4 +12,11 @@ public class BoardModel implements BoardModels{
 
     public BoardModel() { //TODO need implementation
     }
+
+    @Override
+    public void updateBoardState(long currentNanoTime) {
+        //Move snake head
+
+        //Update snake body
+    }
 }

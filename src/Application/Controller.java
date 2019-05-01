@@ -51,7 +51,7 @@ public class Controller {
         //Get gc for canvases
         new AnimationTimer(){
             @Override
-            public void handle(long now) {
+            public void handle(long currentNanoTime) {
                 //Update elements
 
                 //Detect collision
