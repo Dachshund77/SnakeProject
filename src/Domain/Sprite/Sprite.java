@@ -54,4 +54,12 @@ public abstract class Sprite implements Sprites{
     public double getWidth() {
         return width;
     }
+
+    public void setxVelocity(double xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public void setyVelocity(double yVelocity) {
+        this.yVelocity = yVelocity;
+    }
 }

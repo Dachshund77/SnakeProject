@@ -3,6 +3,7 @@ package Application;
 import Domain.Board.BoardModel;
 import Domain.Game.GameModel;
 import Domain.Game.GameModels;
+import Domain.Sprite.SnakeHead;
 import Domain.Sprite.Sprites;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -32,6 +33,8 @@ public class Controller {
     private GameModels gameModel;
     private KeyCode lastKeyPressed;
 
+    private long lastNanoTime = System.nanoTime();
+
     /**
      * Method to start and attach a new gameModels and BordModels to to the Scene.
      * @param event the event that starts this method.
@@ -47,13 +50,16 @@ public class Controller {
     private void startGameLoop(){
         System.out.println("Starting new Game Loop"); //TODO Remove before release
         //Init needed values
-
         //Get gc for canvases
         new AnimationTimer(){
             @Override
             public void handle(long currentNanoTime) { //TODO possible rewrite this with timelines and keyframes. More control over fps.
+                System.out.println("currentNanoTime = " + currentNanoTime);
+                long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
+                System.out.println("timePassedInMilliseconds = " + timePassedInMilliseconds);
+                lastNanoTime = currentNanoTime;
                 //Update elements
-                gameModel.updateGameState(currentNanoTime); // TODO no colission yet
+                gameModel.updateGameState(timePassedInMilliseconds); // TODO no colission yet
                 //Draw
                 GraphicsContext gameCanvasGC = gameCanvas.getGraphicsContext2D();
                 gameCanvasGC.clearRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight()); //Whole canvas
@@ -70,19 +76,29 @@ public class Controller {
     @FXML
     public void handleUserInput(KeyEvent keyEvent) {
         System.out.println("fire event!");
+        SnakeHead snakeHead = gameModel.getBoardModel().getSnakeHead();
+        double speed = 0.1;
         KeyCode keyPressed = keyEvent.getCode();
         switch (keyPressed){
             case UP:
                 lastKeyPressed = KeyCode.UP;
+                snakeHead.setxVelocity(0);
+                snakeHead.setyVelocity(-1*speed);
                 break;
             case LEFT:
                 lastKeyPressed = KeyCode.LEFT;
+                snakeHead.setxVelocity(-1*speed);
+                snakeHead.setyVelocity(0);
                 break;
             case DOWN:
                 lastKeyPressed = KeyCode.DOWN;
+                snakeHead.setxVelocity(0);
+                snakeHead.setyVelocity(1*speed);
                 break;
             case RIGHT:
                 lastKeyPressed = KeyCode.RIGHT;
+                snakeHead.setxVelocity(1*speed);
+                snakeHead.setyVelocity(0);
                 break;
         }
         System.out.println("lastKeyPressed = " + lastKeyPressed); //TODO remove before release
