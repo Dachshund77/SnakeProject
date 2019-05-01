@@ -9,4 +9,7 @@ public class BoardModel {
 
     SnakeHead snakeHead;
     ArrayList<SnakeBody> snakeBodies;
+
+    public BoardModel() { //TODO need implementation
+    }
 }
