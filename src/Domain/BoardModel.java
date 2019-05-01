@@ -2,7 +2,7 @@ package Domain;
 
 import java.util.ArrayList;
 
-public class BoardModel {
+public class BoardModel implements BoardModels{
 
     Double[][] coordinates;
     ArrayList<Food> foods;

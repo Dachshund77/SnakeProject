@@ -3,7 +3,7 @@ package Domain;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class GameModel {
+public class GameModel implements GameModels {
     BoardModel boardModel;
     IntegerProperty scoreProperty = new SimpleIntegerProperty(this,"Score",0); //TODO naming convention
 
