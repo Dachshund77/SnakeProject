@@ -7,6 +7,7 @@ import Domain.Sprite.Sprites;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Actual implementation of the Board state. Note that the models height and width can differ from the canvas where it is displayed.
@@ -32,19 +33,23 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
     }
 
     @Override
-    public void updateBoardState(long currentNanoTime) {
+    public void updateBoardState(long milSecPassed) {
         //Move snake head and save for new snake body
         double tempxPosition = snakeHead.getxPosition();
         double tempyPosition = snakeHead.getyPosition();
-        snakeHead.update(currentNanoTime);
+        snakeHead.update(milSecPassed);
 
-        //Update snake body
-        for (SnakeBody snakeBody : snakeBodies) {
-            snakeBody.update(currentNanoTime);
+        //Update snake body, Need to use a iterator to avoid ConcurrentModificationException
+        for (Iterator<SnakeBody> iterator = snakeBodies.iterator();iterator.hasNext();){
+            SnakeBody snakeBody = iterator.next();
+            snakeBody.update(milSecPassed);
+            if (snakeBody.getLifetime() < 0){
+                iterator.remove();
+            }
         }
 
         //Add a new body
-        snakeBodies.add(new SnakeBody(tempxPosition, tempyPosition, snakeHead.getHeight(), snakeHead.getWidth(), Color.RED, 100000));
+        snakeBodies.add(new SnakeBody(tempxPosition, tempyPosition, snakeHead.getHeight(), snakeHead.getWidth(), Color.RED, 1000));
     }
 
     @Override
@@ -62,4 +67,6 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
     public SnakeHead getSnakeHead() {
         return snakeHead;
     }
+
+
 }

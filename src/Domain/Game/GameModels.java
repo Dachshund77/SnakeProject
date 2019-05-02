@@ -10,10 +10,10 @@ public interface GameModels {
     /**
      * Method that updates the GameState and detect eventual important gameState like GameOver.
      * Note that this method should update the GameState.
-     * @param currentNanoTime Time passed since last update
+     * @param milSecPassed Time passed since last update
      * @see BoardModels#updateBoardState(long)
      */
-    void updateGameState(long currentNanoTime);
+    void updateGameState(long milSecPassed);
 
     /**
      * Helper method that retuns the Board attached to the Game.

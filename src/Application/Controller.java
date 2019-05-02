@@ -76,7 +76,7 @@ public class Controller {
     @FXML
     public void handleUserInput(KeyEvent keyEvent) {
         System.out.println("fire event!");
-        SnakeHead snakeHead = gameModel.getBoardModel().getSnakeHead();
+        SnakeHead snakeHead = gameModel.getBoardModel().getSnakeHead(); //TODO I dont like that we have a direct reference to the snakeHead, not very modular
         double speed = 0.1;
         KeyCode keyPressed = keyEvent.getCode();
         switch (keyPressed){

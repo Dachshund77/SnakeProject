@@ -13,10 +13,10 @@ public interface BoardModels {
     /**
      * Updates the Sprites on a board.
      * Note that the This method should be called in the GameLoop.
-     * @param currentNanoTime Time passed since last update
+     * @param milSecPassed Time passed since last update
      * @see Sprites
      */
-    void updateBoardState(long currentNanoTime);
+    void updateBoardState(long milSecPassed);
 
     /**
      * Method that returns all Sprites on a board that should be drawn.
@@ -29,4 +29,5 @@ public interface BoardModels {
      * @return the players snakeHead
      */
     SnakeHead getSnakeHead();
+
 }

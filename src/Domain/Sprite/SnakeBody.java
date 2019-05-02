@@ -19,7 +19,7 @@ public class SnakeBody extends Sprite {
      * In this object we will also decrement the lifetime of this object.
      */
     @Override
-    public void update(double time) {
+    public void update(double time) { //TODO were not actually removing anything from the boardModel
         super.update(time);
         lifetime -= time;
     }

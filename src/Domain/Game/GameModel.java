@@ -19,9 +19,9 @@ public class GameModel implements GameModels { //TODO this class might also be i
     }
 
     @Override
-    public void updateGameState(long currentNanoTime) {
+    public void updateGameState(long milSecPassed) {
         //update board
-        boardModel.updateBoardState(currentNanoTime);
+        boardModel.updateBoardState(milSecPassed);
 
         //get any collision with the head
     }
