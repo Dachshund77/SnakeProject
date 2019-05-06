@@ -68,5 +68,8 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
         return snakeHead;
     }
 
-
+    @Override
+    public ArrayList<SnakeBody> getAllSnakeBodies() {
+        return snakeBodies;
+    }
 }
