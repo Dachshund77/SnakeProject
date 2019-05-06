@@ -1,12 +1,14 @@
 package Domain.Board;
 
-import Domain.Food.Food;
 import Domain.Food.Foods;
-import Domain.Moveable.Movable;
-import Domain.PlayerEntity.MovablePlayerEntity;
+import Domain.Moveable.Moveable;
+import Domain.Moveable.Moveables;
+import Domain.PlayerEntity.MoveablePlayerEntity;
+import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
-import Domain.TimeMovable.TimeMovable;
+import Domain.TimeMovable.TimeMoveable;
 import Domain.Timeable.Timeable;
+import Domain.Timeable.Timeables;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,10 +20,10 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     double width;
 
     private ArrayList<Sprites> sprites;
-    private ArrayList<MovablePlayerEntity> movablePlayerEntities;
-    private ArrayList<Movable> movables;
-    private ArrayList<Timeable> timeables;
-    private ArrayList<TimeMovable> timeMovables;
+    private ArrayList<PlayerEntities> playerEntities;
+    private ArrayList<Moveables> movables;
+    private ArrayList<Timeables> timeables;
+    private ArrayList<TimeMoveable> timeMovables;
     private ArrayList<Foods> foods; //TODO should be split at some point into moveable food and timeable food
 
     @Override
@@ -30,22 +32,22 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     }
 
     @Override
-    public ArrayList<MovablePlayerEntity> getMovablePlayerEntities() {
-        return movablePlayerEntities;
+    public ArrayList<PlayerEntities> getMovablePlayerEntities() {
+        return playerEntities;
     }
 
     @Override
-    public ArrayList<Movable> getMovables() {
+    public ArrayList<Moveables> getMovables() {
         return movables;
     }
 
     @Override
-    public ArrayList<Timeable> getTimeables() {
+    public ArrayList<Timeables> getTimeables() {
         return timeables;
     } //TODO need javadoc
 
     @Override
-    public ArrayList<TimeMovable> getTimeMovables() {
+    public ArrayList<TimeMoveable> getTimeMovables() {
         return timeMovables;
     }
 
@@ -61,9 +63,9 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         ArrayList<Sprites> returnArrayList = new ArrayList<>();
 
         returnArrayList.addAll(sprites);
-        returnArrayList.addAll(movablePlayerEntities);
-        returnArrayList.addAll(movables);
-        returnArrayList.addAll(timeables);
+        returnArrayList.addAll((Collection<? extends Sprites>) playerEntities);
+        returnArrayList.addAll((Collection<? extends Sprites>) movables);
+        returnArrayList.addAll((Collection<? extends Sprites>) timeables);
         returnArrayList.addAll(timeMovables);
         returnArrayList.addAll((Collection<? extends Sprites>) foods);
 
@@ -72,8 +74,8 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     }
 
     @Override
-    public ArrayList<Timeable> getAllTimeAbles() {
-        ArrayList<Timeable> returnArrayList = new ArrayList<>();
+    public ArrayList<Timeables> getAllTimeAbles() {
+        ArrayList<Timeables> returnArrayList = new ArrayList<>();
 
         returnArrayList.addAll(timeables);
         returnArrayList.addAll(timeMovables);
@@ -84,10 +86,10 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
 
     @SuppressWarnings("unchecked")
     @Override
-    public ArrayList<Movable> getAllMoveables() {
-        ArrayList<Movable> returnArrayList = new ArrayList<>();
+    public ArrayList<Moveables> getAllMoveables() {
+        ArrayList<Moveables> returnArrayList = new ArrayList<>();
 
-        returnArrayList.addAll(movablePlayerEntities);
+        returnArrayList.addAll((Collection<? extends Moveable>) playerEntities);
         returnArrayList.addAll(movables);
         returnArrayList.addAll(timeMovables);
 
@@ -98,11 +100,11 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return sprites.remove(s);
     }
 
-    public boolean removePlayerEntity(MovablePlayerEntity movablePlayerEntity) {
-        return movablePlayerEntities.remove(movablePlayerEntity);
+    public boolean removePlayerEntity(MoveablePlayerEntity movablePlayerEntity) {
+        return playerEntities.remove(movablePlayerEntity);
     }
 
-    public boolean removeMoveable(Movable m) {
+    public boolean removeMoveable(Moveable m) {
         return movables.remove(m);
     }
 
@@ -110,7 +112,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return timeables.remove(t);
     }
 
-    public boolean removeTimeMovable(TimeMovable tm) {
+    public boolean removeTimeMovable(TimeMoveable tm) {
         return timeMovables.remove(tm);
     }
 
@@ -122,11 +124,11 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return sprites.add(s);
     }
 
-    public boolean addPlayerEntity(MovablePlayerEntity p) {
-        return movablePlayerEntities.add(p);
+    public boolean addPlayerEntity(MoveablePlayerEntity p) {
+        return playerEntities.add(p);
     }
 
-    public boolean addMoveable(Movable m) {
+    public boolean addMoveable(Moveable m) {
         return movables.add(m);
     }
 
@@ -134,7 +136,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return timeables.add(t);
     }
 
-    public boolean addTimeMoveable(TimeMovable tm) {
+    public boolean addTimeMoveable(TimeMoveable tm) {
         return timeMovables.add(tm);
     }
 

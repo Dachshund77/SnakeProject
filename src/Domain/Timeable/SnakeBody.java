@@ -1,11 +1,7 @@
-package Domain.Moveable;
+package Domain.Timeable;
 
-import Domain.PlayerEntity.MovablePlayerEntity;
 import Domain.Sprite.Sprites;
-import Domain.Timeable.Timeable;
-import Domain.Timeable.Timeables;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 public class SnakeBody extends Timeable { //TODO changes in velocity need to be considered to properly make the snake body collision

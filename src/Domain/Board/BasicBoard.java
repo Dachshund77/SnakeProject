@@ -1,7 +1,7 @@
 package Domain.Board;
 
 import Domain.Food.Food;
-import Domain.Moveable.SnakeBody;
+import Domain.Timeable.SnakeBody;
 import Domain.PlayerEntity.SnakeHead;
 import javafx.scene.paint.Color;
 

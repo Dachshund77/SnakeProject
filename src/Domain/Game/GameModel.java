@@ -1,12 +1,15 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
-import Domain.Moveable.Movable;
-import Domain.Moveable.SnakeBody;
-import Domain.PlayerEntity.MovablePlayerEntity;
+import Domain.Moveable.Moveable;
+import Domain.Moveable.Moveables;
+import Domain.PlayerEntity.PlayerEntities;
+import Domain.Timeable.SnakeBody;
+import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.SnakeHead;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeable;
+import Domain.Timeable.Timeables;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     public void updateGameState(long milSecPassed) {
 
         // Place a new Snakebody
-        ArrayList<MovablePlayerEntity> playerEntities = boardModel.getMovablePlayerEntities();
+        ArrayList<PlayerEntities> playerEntities = boardModel.getMovablePlayerEntities();
         for (PlayerEntities playerEntity : playerEntities) {
             if (playerEntity instanceof SnakeHead) {
                 SnakeHead snakeHead = (SnakeHead) playerEntity;
@@ -37,7 +40,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         //get any collision with player enteties
         detectCollision();
 
-        SnakeHead snakeHead = boardModel.getSnakeHead();
+        SnakeHead snakeHead = boardModel.getSnakeHead(); //TODO to be unfucked later
         ArrayList<Sprites> sprites = boardModel.getSprites();
         for (Sprites sprite : sprites) {
             if (sprite.intersects(snakeHead)) { //The order of this actual matters
@@ -52,7 +55,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     }
 
     private void moveMovables(long milSecPassed) {
-        ArrayList<Movable> moveables = boardModel.getAllMoveables();
+        ArrayList<Moveables> moveables = boardModel.getAllMoveables();
         for (Moveables moveable : moveables) {
             moveable.move(milSecPassed);
         }
@@ -61,8 +64,8 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     private void updateTimeables(long milSecPassed) {
         // Update Timeables
-        ArrayList<Movable> timeables = boardModel.getAllTimeAbles();
-        for (Iterator<Movable> iterator = timeables.iterator(); iterator.hasNext();){
+        ArrayList<Timeables> timeables = boardModel.getAllTimeAbles();
+        for (Iterator<Timeables> iterator = timeables.iterator(); iterator.hasNext();){
             Timeable timeable = (Timeable) iterator.next();
             timeable.update(milSecPassed);
             if (timeable.getCurrentLifetime() > timeable.getMaxLifeTime()){
@@ -72,7 +75,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     }
 
     private void detectCollision() {
-        ArrayList<Movable> moveables = boardModel.getAllMoveables();
+        ArrayList<Moveables> moveables = boardModel.getAllMoveables();
         ArrayList<Sprites> sprites = boardModel.getAllSprites();
         for (Moveables moveable : moveables) {
             for (Sprites sprite : sprites) {

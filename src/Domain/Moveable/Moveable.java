@@ -2,20 +2,20 @@ package Domain.Moveable;
 
 import Domain.Sprite.Sprite;
 
-public abstract class Movable extends Sprite {
+public abstract class Moveable extends Sprite implements Moveables{
 
     protected double xVelocity;
     protected double yVelocity;
     protected double speed;
 
-    public Movable(double xPosition, double yPosition, double height, double width, double speed) {
+    public Moveable(double xPosition, double yPosition, double height, double width, double speed) {
         super(xPosition, yPosition, height, width);
         this.xVelocity = 0;
         this.yVelocity = 0;
         this.speed = speed;
     }
 
-
+    @Override
     public void move(long time) {
         xPosition += xVelocity * time;
         yPosition += yVelocity * time;

@@ -3,7 +3,8 @@ package Application;
 import Domain.Board.BasicBoard;
 import Domain.Game.BasicGame;
 import Domain.Game.GameModels;
-import Domain.PlayerEntity.MovablePlayerEntity;
+import Domain.PlayerEntity.MoveablePlayerEntity;
+import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -85,7 +86,7 @@ public class Controller {
         KeyCode keyCode = keyEvent.getCode();
 
         // For each player entity we look if it does something
-        ArrayList<MovablePlayerEntity> playerEntities = gameModel.getBoardModel().getMovablePlayerEntities();
+        ArrayList<MoveablePlayerEntity> playerEntities = gameModel.getBoardModel().getMovablePlayerEntities();
         for (PlayerEntities p : playerEntities) {
             p.handleUserInput(keyCode);
         }

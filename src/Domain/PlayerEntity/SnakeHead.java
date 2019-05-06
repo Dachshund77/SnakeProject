@@ -1,11 +1,10 @@
 package Domain.PlayerEntity;
 
-import Domain.Sprite.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
-public class SnakeHead extends MovablePlayerEntity { //TODO the circle could become a image or something
+public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could become a image or something
 
     private Color paint;
     private SnakeControl controls;

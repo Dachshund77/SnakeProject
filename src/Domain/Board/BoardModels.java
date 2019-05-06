@@ -1,12 +1,14 @@
 package Domain.Board;
 
-import Domain.Food.Food;
 import Domain.Food.Foods;
-import Domain.Moveable.Movable;
-import Domain.PlayerEntity.MovablePlayerEntity;
+import Domain.Moveable.Moveable;
+import Domain.Moveable.Moveables;
+import Domain.PlayerEntity.MoveablePlayerEntity;
+import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
-import Domain.TimeMovable.TimeMovable;
+import Domain.TimeMovable.TimeMoveable;
 import Domain.Timeable.Timeable;
+import Domain.Timeable.Timeables;
 
 import java.util.ArrayList;
 
@@ -22,43 +24,43 @@ public interface BoardModels {
      */
     ArrayList<Sprites> getSprites();
 
-    ArrayList<MovablePlayerEntity> getMovablePlayerEntities();//TODO need javaDoc
+    ArrayList<PlayerEntities> getMovablePlayerEntities();//TODO need javaDoc
 
-    ArrayList<Movable> getMovables(); //TODO need Javadoc
+    ArrayList<Moveables> getMovables(); //TODO need Javadoc
 
-    ArrayList<Timeable> getTimeables(); //TODO need javadoc
+    ArrayList<Timeables> getTimeables(); //TODO need javadoc
 
     ArrayList<Foods> getFoods(); //TODO need javadoc
 
-    ArrayList<TimeMovable> getTimeMovables(); //TODO need javadoc
+    ArrayList<TimeMoveable> getTimeMovables(); //TODO need javadoc
 
     ArrayList<Sprites> getAllSprites();
 
-    ArrayList<Timeable> getAllTimeAbles();
+    ArrayList<Timeables> getAllTimeAbles();
 
-    ArrayList<Movable> getAllMoveables();
+    ArrayList<Moveables> getAllMoveables();
 
     boolean removeSprite(Sprites s);
 
-    boolean removePlayerEntity(MovablePlayerEntity movablePlayerEntity);
+    boolean removePlayerEntity(MoveablePlayerEntity movablePlayerEntity);
 
-    boolean removeMoveable(Movable m);
+    boolean removeMoveable(Moveable m);
 
     boolean removeTimeable(Timeable t);
 
-    boolean removeTimeMovable(TimeMovable tm);
+    boolean removeTimeMovable(TimeMoveable tm);
 
     boolean removeFood(Foods f);
 
     boolean addSprite(Sprites s);
 
-    boolean addPlayerEntity(MovablePlayerEntity p);
+    boolean addPlayerEntity(MoveablePlayerEntity p);
 
-    boolean addMoveable(Movable m);
+    boolean addMoveable(Moveable m);
 
     boolean addTimeable(Timeable t);
 
-    boolean addTimeMoveable(TimeMovable tm);
+    boolean addTimeMoveable(TimeMoveable tm);
 
     boolean addFood(Foods f);
 }

@@ -1,16 +1,16 @@
 package Domain.TimeMovable;
 
-import Domain.Moveable.Movable;
+import Domain.Moveable.Moveable;
 import Domain.Timeable.Timeables;
 
-public abstract class TimeMovable extends Movable implements Timeables {//TODO not realy finished implementation
+public abstract class TimeMoveable extends Moveable implements Timeables {//TODO not realy finished implementation
 
 
     protected double maxLifeTime;
     protected double currentLifetime;
     protected double collisionIgnoranceTime;
 
-    public TimeMovable(double xPosition, double yPosition, double height, double width, double speed, double maxLifeTime, double currentLifetime, double collisionIgnoranceTime) {
+    public TimeMoveable(double xPosition, double yPosition, double height, double width, double speed, double maxLifeTime, double currentLifetime, double collisionIgnoranceTime) {
         super(xPosition, yPosition, height, width, speed);
         this.maxLifeTime = maxLifeTime;
         this.currentLifetime = currentLifetime;
