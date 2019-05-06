@@ -1,8 +1,12 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
+import Domain.Sprite.SnakeHead;
+import Domain.Sprite.Sprites;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+
+import java.util.ArrayList;
 
 /**
  * Actual iimplementation of the GameModels interface.
@@ -22,8 +26,14 @@ public class GameModel implements GameModels { //TODO this class might also be i
     public void updateGameState(long milSecPassed) {
         //update board
         boardModel.updateBoardState(milSecPassed);
-
         //get any collision with the head
+        SnakeHead snakeHead = boardModel.getSnakeHead(); //TODO Hardcoded, refactor to be more flexible
+        ArrayList<Sprites> sprites = boardModel.getAllSprites();
+        for (Sprites sprite : sprites) {
+            if (snakeHead.intersects(sprite)){
+                System.out.println("Snakehead intersects with "+sprites.getClass());
+            }
+        }
     }
 
     @Override
