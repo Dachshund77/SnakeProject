@@ -9,12 +9,6 @@ import javafx.scene.canvas.GraphicsContext;
 public interface Sprites {
 
     /**
-     * Method that will update relevant fields after amount time has passed.
-     * @param time double of how much time passed //TODO miliseconds, seconds?
-     */
-    void update(double time);
-
-    /**
      * Method that tells the GraphicsContext how to draw this object.
      * @param gc the Canvases GraphicsContext
      */

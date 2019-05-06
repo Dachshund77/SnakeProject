@@ -7,26 +7,17 @@ import javafx.geometry.Rectangle2D;
  */
 public abstract class Sprite implements Sprites{
 
-    double xPosition;
-    double yPosition;
+    protected double xPosition;
+    protected double yPosition;
 
-    double xVelocity;
-    double yVelocity;
-
-    double height;
-    double width;
+    protected double height;
+    protected double width;
 
     public Sprite(double xPosition, double yPosition, double height, double width) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.height = height;
         this.width = width;
-    }
-
-    @Override
-    public void update(double time) {
-        xPosition += xVelocity * time;
-        yPosition += yVelocity * time;
     }
 
     @Override
@@ -55,11 +46,4 @@ public abstract class Sprite implements Sprites{
         return width;
     }
 
-    public void setxVelocity(double xVelocity) {
-        this.xVelocity = xVelocity;
-    }
-
-    public void setyVelocity(double yVelocity) {
-        this.yVelocity = yVelocity;
-    }
 }

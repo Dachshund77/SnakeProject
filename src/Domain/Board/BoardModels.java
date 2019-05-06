@@ -1,8 +1,12 @@
 package Domain.Board;
 
-import Domain.Sprite.SnakeBody;
-import Domain.Sprite.SnakeHead;
+import Domain.Food.Food;
+import Domain.Food.Foods;
+import Domain.Moveable.Movable;
+import Domain.PlayerEntity.MovablePlayerEntity;
 import Domain.Sprite.Sprites;
+import Domain.TimeMovable.TimeMovable;
+import Domain.Timeable.Timeable;
 
 import java.util.ArrayList;
 
@@ -12,29 +16,49 @@ import java.util.ArrayList;
 public interface BoardModels {
 
     /**
-     * Updates the Sprites on a board.
-     * Note that the This method should be called in the GameLoop.
-     * @param milSecPassed Time passed since last update
-     * @see Sprites
-     */
-    void updateBoardState(long milSecPassed);
-
-    /**
-     * Method that returns all Sprites on a board that can be drawn.
+     * Method that returns all Sprites on a board that can be drawn. //TODO WRONG!
+     *
      * @return All Drawable Sprites on this Board.
      */
+    ArrayList<Sprites> getSprites();
+
+    ArrayList<MovablePlayerEntity> getMovablePlayerEntities();//TODO need javaDoc
+
+    ArrayList<Movable> getMovables(); //TODO need Javadoc
+
+    ArrayList<Timeable> getTimeables(); //TODO need javadoc
+
+    ArrayList<Foods> getFoods(); //TODO need javadoc
+
+    ArrayList<TimeMovable> getTimeMovables(); //TODO need javadoc
+
     ArrayList<Sprites> getAllSprites();
 
-    /**
-     * Method that returns all SnakeBodies on a board.
-     * @return List of all Snake Bodies
-     */
-    ArrayList<SnakeBody> getAllSnakeBodies();
+    ArrayList<Timeable> getAllTimeAbles();
 
-    /**
-     * Method that gets this board player object, the snakeHead.
-     * @return the players snakeHead
-     */
-    SnakeHead getSnakeHead();
+    ArrayList<Movable> getAllMoveables();
 
+    boolean removeSprite(Sprites s);
+
+    boolean removePlayerEntity(MovablePlayerEntity movablePlayerEntity);
+
+    boolean removeMoveable(Movable m);
+
+    boolean removeTimeable(Timeable t);
+
+    boolean removeTimeMovable(TimeMovable tm);
+
+    boolean removeFood(Foods f);
+
+    boolean addSprite(Sprites s);
+
+    boolean addPlayerEntity(MovablePlayerEntity p);
+
+    boolean addMoveable(Movable m);
+
+    boolean addTimeable(Timeable t);
+
+    boolean addTimeMoveable(TimeMovable tm);
+
+    boolean addFood(Foods f);
 }

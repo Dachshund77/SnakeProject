@@ -9,9 +9,8 @@ public interface GameModels {
 
     /**
      * Method that updates the GameState and detect eventual important gameState like GameOver.
-     * Note that this method should update the GameState.
-     * @param milSecPassed Time passed since last update
-     * @see BoardModels#updateBoardState(long)
+     * Note that this method should move the GameState.
+     * @param milSecPassed Time passed since last move
      */
     void updateGameState(long milSecPassed);
 

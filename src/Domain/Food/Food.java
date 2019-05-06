@@ -1,5 +1,6 @@
-package Domain.Sprite;
+package Domain.Food;
 
+import Domain.Sprite.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

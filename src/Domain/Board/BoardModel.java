@@ -1,81 +1,152 @@
 package Domain.Board;
 
-import Domain.Sprite.Food;
-import Domain.Sprite.SnakeBody;
-import Domain.Sprite.SnakeHead;
+import Domain.Food.Food;
+import Domain.Food.Foods;
+import Domain.Moveable.Movable;
+import Domain.PlayerEntity.MovablePlayerEntity;
 import Domain.Sprite.Sprites;
-import javafx.scene.paint.Color;
+import Domain.TimeMovable.TimeMovable;
+import Domain.Timeable.Timeable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collection;
 
-/**
- * Actual implementation of the Board state. Note that the models height and width can differ from the canvas where it is displayed.
- */
-public class BoardModel implements BoardModels { //TODO possible change the fields to take sprite interface
 
-    //Double[][] coordinates; //TODO storing stuff in 2d array might be obsolete
-    private double height;
-    private double width;
-    private ArrayList<Food> foods;
+public abstract class BoardModel implements BoardModels { //TODO could have better control to prevent pollution
 
-    private SnakeHead snakeHead;
-    private ArrayList<SnakeBody> snakeBodies;
+    double height;
+    double width;
 
-    public BoardModel(double height, double width) {
-        this.height = height;
-        this.width = width;
+    private ArrayList<Sprites> sprites;
+    private ArrayList<MovablePlayerEntity> movablePlayerEntities;
+    private ArrayList<Movable> movables;
+    private ArrayList<Timeable> timeables;
+    private ArrayList<TimeMovable> timeMovables;
+    private ArrayList<Foods> foods; //TODO should be split at some point into moveable food and timeable food
 
-        this.snakeHead = new SnakeHead(width/2,height/2,height*0.05,width*0.05,Color.RED, 0.1);
-
-        this.snakeBodies = new ArrayList<>();
-        this.foods = new ArrayList<>();
+    @Override
+    public ArrayList<Sprites> getSprites() {
+        return sprites;
     }
 
     @Override
-    public void updateBoardState(long milSecPassed) {
-        //Move snake head and save for new snake body
-        double tempxPosition = snakeHead.getxPosition();
-        double tempyPosition = snakeHead.getyPosition();
-        snakeHead.update(milSecPassed);
-
-        //Update snake body, Need to use a iterator to avoid ConcurrentModificationException
-        for (Iterator<SnakeBody> iterator = snakeBodies.iterator();iterator.hasNext();){
-            SnakeBody snakeBody = iterator.next();
-            snakeBody.update(milSecPassed);
-            if (snakeBody.getCurrentLifetime() > snakeBody.getMaxLifeTime()){
-                iterator.remove();
-            }
-        }
-
-        //Add a new body
-        double snakeHeadHeight = snakeHead.getHeight();
-        double snakeHeadWidth = snakeHead.getWidth();
-        double newSnakeBodyHeight = snakeHead.getHeight(); //Could technicly be smaller then the snakehead
-        double newSnakeBodyWidth = snakeHead.getWidth(); //Could technicly be smaller then the snakehead
-        double snakeHeadSpeed = snakeHead.getSpeed();
-        double noCollisionTime = ((newSnakeBodyWidth+snakeHeadWidth)/snakeHeadSpeed)+ ((newSnakeBodyHeight+snakeHeadHeight)/snakeHeadSpeed);
-        snakeBodies.add(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, 1000,noCollisionTime));
+    public ArrayList<MovablePlayerEntity> getMovablePlayerEntities() {
+        return movablePlayerEntities;
     }
 
+    @Override
+    public ArrayList<Movable> getMovables() {
+        return movables;
+    }
+
+    @Override
+    public ArrayList<Timeable> getTimeables() {
+        return timeables;
+    } //TODO need javadoc
+
+    @Override
+    public ArrayList<TimeMovable> getTimeMovables() {
+        return timeMovables;
+    }
+
+    @Override
+    public ArrayList<Foods> getFoods() {
+        return foods;
+    }
+
+    @SuppressWarnings("unchecked")
     @Override
     public ArrayList<Sprites> getAllSprites() {
+
         ArrayList<Sprites> returnArrayList = new ArrayList<>();
 
-        returnArrayList.addAll(foods);
-        returnArrayList.addAll(snakeBodies);
-        returnArrayList.add(snakeHead);
+        returnArrayList.addAll(sprites);
+        returnArrayList.addAll(movablePlayerEntities);
+        returnArrayList.addAll(movables);
+        returnArrayList.addAll(timeables);
+        returnArrayList.addAll(timeMovables);
+        returnArrayList.addAll((Collection<? extends Sprites>) foods);
+
+        return returnArrayList;
+
+    }
+
+    @Override
+    public ArrayList<Timeable> getAllTimeAbles() {
+        ArrayList<Timeable> returnArrayList = new ArrayList<>();
+
+        returnArrayList.addAll(timeables);
+        returnArrayList.addAll(timeMovables);
+
 
         return returnArrayList;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public SnakeHead getSnakeHead() {
-        return snakeHead;
+    public ArrayList<Movable> getAllMoveables() {
+        ArrayList<Movable> returnArrayList = new ArrayList<>();
+
+        returnArrayList.addAll(movablePlayerEntities);
+        returnArrayList.addAll(movables);
+        returnArrayList.addAll(timeMovables);
+
+        return returnArrayList;
     }
 
-    @Override
-    public ArrayList<SnakeBody> getAllSnakeBodies() {
-        return snakeBodies;
+    public boolean removeSprite(Sprites s) {
+        return sprites.remove(s);
+    }
+
+    public boolean removePlayerEntity(MovablePlayerEntity movablePlayerEntity) {
+        return movablePlayerEntities.remove(movablePlayerEntity);
+    }
+
+    public boolean removeMoveable(Movable m) {
+        return movables.remove(m);
+    }
+
+    public boolean removeTimeable(Timeable t) {
+        return timeables.remove(t);
+    }
+
+    public boolean removeTimeMovable(TimeMovable tm) {
+        return timeMovables.remove(tm);
+    }
+
+    public boolean removeFood(Foods f) {
+        return foods.remove(f);
+    }
+
+    public boolean addSprite(Sprites s) {
+        return sprites.add(s);
+    }
+
+    public boolean addPlayerEntity(MovablePlayerEntity p) {
+        return movablePlayerEntities.add(p);
+    }
+
+    public boolean addMoveable(Movable m) {
+        return movables.add(m);
+    }
+
+    public boolean addTimeable(Timeable t) {
+        return timeables.add(t);
+    }
+
+    public boolean addTimeMoveable(TimeMovable tm) {
+        return timeMovables.add(tm);
+    }
+
+    public boolean addFood(Foods f) {
+        return foods.add(f);
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
     }
 }
