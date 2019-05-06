@@ -30,8 +30,8 @@ public class GameModel implements GameModels { //TODO this class might also be i
         SnakeHead snakeHead = boardModel.getSnakeHead(); //TODO Hardcoded, refactor to be more flexible
         ArrayList<Sprites> sprites = boardModel.getAllSprites();
         for (Sprites sprite : sprites) {
-            if (snakeHead.intersects(sprite)){
-                System.out.println("Snakehead intersects with "+sprites.getClass());
+            if (sprite.intersects(snakeHead)){ //The order of this actual matters
+                System.out.println("Snakehead intersects with "+sprite.getClass().getName());
             }
         }
     }

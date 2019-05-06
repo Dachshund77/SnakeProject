@@ -77,7 +77,7 @@ public class Controller {
     public void handleUserInput(KeyEvent keyEvent) {
         System.out.println("fire event!");
         SnakeHead snakeHead = gameModel.getBoardModel().getSnakeHead(); //TODO I dont like that we have a direct reference to the snakeHead, not very modular
-        double speed = 0.1;
+        double speed = 0.1; //TODO should be moved to the snakeHead
         KeyCode keyPressed = keyEvent.getCode();
         switch (keyPressed){
             case UP:

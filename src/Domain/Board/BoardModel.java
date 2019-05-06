@@ -26,7 +26,7 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
         this.height = height;
         this.width = width;
 
-        this.snakeHead = new SnakeHead(width/2,height/2,height*0.05,width*0.05,Color.RED);
+        this.snakeHead = new SnakeHead(width/2,height/2,height*0.05,width*0.05,Color.RED, 0.1);
 
         this.snakeBodies = new ArrayList<>();
         this.foods = new ArrayList<>();
@@ -43,13 +43,19 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
         for (Iterator<SnakeBody> iterator = snakeBodies.iterator();iterator.hasNext();){
             SnakeBody snakeBody = iterator.next();
             snakeBody.update(milSecPassed);
-            if (snakeBody.getCurrentLifetime() < 0){
+            if (snakeBody.getCurrentLifetime() > snakeBody.getMaxLifeTime()){
                 iterator.remove();
             }
         }
 
         //Add a new body
-        snakeBodies.add(new SnakeBody(tempxPosition, tempyPosition, snakeHead.getHeight(), snakeHead.getWidth(), Color.RED, 1000));
+        double snakeHeadHeight = snakeHead.getHeight();
+        double snakeHeadWidth = snakeHead.getWidth();
+        double newSnakeBodyHeight = snakeHead.getHeight(); //Could technicly be smaller then the snakehead
+        double newSnakeBodyWidth = snakeHead.getWidth(); //Could technicly be smaller then the snakehead
+        double snakeHeadSpeed = snakeHead.getSpeed();
+        double noCollisionTime = ((newSnakeBodyWidth+snakeHeadWidth)/snakeHeadSpeed)+ ((newSnakeBodyHeight+snakeHeadHeight)/snakeHeadSpeed);
+        snakeBodies.add(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, 1000,noCollisionTime));
     }
 
     @Override

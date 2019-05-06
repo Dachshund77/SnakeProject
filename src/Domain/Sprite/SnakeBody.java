@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public class SnakeBody extends Sprite { //TODO changes in velocity need to be considered to properly make the snake body collision
 
     private Color paint;
-    private double maxLifeTime;
+    private double maxLifeTime; //TODO that can be changed into a property and bind to the gameModel i think
     private double currentLifetime;
     private double collisionIgnoranceTime;
 
