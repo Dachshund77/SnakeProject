@@ -3,17 +3,19 @@ package Domain.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class SnakeBody extends Sprite {
+public class SnakeBody extends Sprite { //TODO changes in velocity need to be considered to properly make the snake body collision
 
     private Color paint;
     private double maxLifeTime;
     private double currentLifetime;
+    private double collisionIgnoranceTime;
 
-    public SnakeBody(double xPosition, double yPosition, double height, double width, Color paint, double maxLifeTime) {
+    public SnakeBody(double xPosition, double yPosition, double height, double width, Color paint, double maxLifeTime, double collisionIgnoranceTime) {
         super(xPosition, yPosition, height, width);
         this.paint = paint;
         this.currentLifetime = 0;
         this.maxLifeTime = maxLifeTime;
+        this.collisionIgnoranceTime = collisionIgnoranceTime;
     }
 
     /**
@@ -36,6 +38,20 @@ public class SnakeBody extends Sprite {
         gc.fillOval(xPosition,yPosition,width,height);
     }
 
+    /**
+     * {@inheritDoc}
+     * This implementation will also return false if the collisionIgnoranceTime is bigger or equal that the current lifetime.
+     * @return True if sprites overlapping, false if not or condition is not met.
+     */
+    @Override
+    public boolean intersects(Sprites s) {
+        if (collisionIgnoranceTime >= currentLifetime){
+            return false;
+        } else {
+            return super.intersects(s);
+        }
+    }
+
     public double getCurrentLifetime() {
         return currentLifetime;
     }
@@ -46,5 +62,13 @@ public class SnakeBody extends Sprite {
 
     public void setMaxLifeTime(double maxLifeTime) {
         this.maxLifeTime = maxLifeTime;
+    }
+
+    public double getCollisionIgnoranceTime() {
+        return collisionIgnoranceTime;
+    }
+
+    public void setCollisionIgnoranceTime(double collisionIgnoranceTime) {
+        this.collisionIgnoranceTime = collisionIgnoranceTime;
     }
 }
