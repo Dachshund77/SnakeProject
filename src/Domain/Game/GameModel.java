@@ -41,11 +41,11 @@ public class GameModel implements GameModels { //TODO this class might also be i
         return boardModel;
     }
 
-    public int getScore() { //TODO naming convention question, mb call this just getScore
+    public int getScore() {
         return score.get();
     }
 
-    public IntegerProperty scoreProperty() { //TODO naming convention
+    public IntegerProperty scoreProperty() {
         return score;
     }
 

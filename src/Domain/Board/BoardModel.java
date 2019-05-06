@@ -43,7 +43,7 @@ public class BoardModel implements BoardModels { //TODO possible change the fiel
         for (Iterator<SnakeBody> iterator = snakeBodies.iterator();iterator.hasNext();){
             SnakeBody snakeBody = iterator.next();
             snakeBody.update(milSecPassed);
-            if (snakeBody.getLifetime() < 0){
+            if (snakeBody.getCurrentLifetime() < 0){
                 iterator.remove();
             }
         }
