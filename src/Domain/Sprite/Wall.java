@@ -15,7 +15,7 @@ public class Wall extends Sprite {
     @Override
     public void render(GraphicsContext gc) {
         gc.setFill(paint);
-        gc.rect(xPosition,yPosition,width,height);
+        gc.fillRect(xPosition,yPosition,width,height);
     }
 
     @Override

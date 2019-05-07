@@ -58,13 +58,13 @@ public class Controller {
             @Override
             public void handle(long currentNanoTime) { //TODO possible rewrite this with timelines and keyframes. More control over fps.
                 // set needed value to keep track of time pased
-                System.out.println("currentNanoTime = " + currentNanoTime);
+
                 long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
-                System.out.println("timePassedInMilliseconds = " + timePassedInMilliseconds);
+
                 lastNanoTime = currentNanoTime;
 
                 //Update game
-                gameModel.updateGameState(timePassedInMilliseconds); // TODO no colission yet
+                gameModel.updateGameState(timePassedInMilliseconds);
 
                 //Draw on canvas
                 GraphicsContext gameCanvasGC = gameCanvas.getGraphicsContext2D();
