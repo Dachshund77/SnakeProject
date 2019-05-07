@@ -17,6 +17,7 @@ import java.util.Iterator;
 public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     BoardModels boardModel;
+    boolean gameOver = false;
 
     @Override
     public void updateGameState(long milSecPassed) {
@@ -91,7 +92,6 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         }
     }
 
-
     private void placeSnakeBody(SnakeHead snakeHead) {
         double tempxPosition = snakeHead.getxPosition();
         double tempyPosition = snakeHead.getyPosition();
@@ -104,5 +104,11 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         boardModel.addTimeable(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, 1000,noCollisionTime));
     }
 
+    private void handleGameEnd(){
 
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
 }

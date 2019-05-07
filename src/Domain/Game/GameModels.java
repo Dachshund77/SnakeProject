@@ -20,4 +20,6 @@ public interface GameModels {
      */
     BoardModels getBoardModel();
 
+    boolean hasEnded();
+
 }
