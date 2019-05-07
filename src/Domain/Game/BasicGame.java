@@ -19,6 +19,7 @@ public class BasicGame extends GameModel { //TODO this class might also be in ch
     public BasicGame(BoardModels boardModel) {
         this.boardModel = boardModel; //TODO here we need to make new
         this.setScore(0);
+        spawnNextFood();
     }
 
     public int getScore() {

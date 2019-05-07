@@ -8,11 +8,13 @@ public class Food extends Sprite implements Foods{  //TODO the circle could beco
 
     private Color paint;
     private double scoreValue;
+    private double addedlength;
 
-    public Food(double xPosition, double yPosition, double height, double width, Color paint, double scoreValue) {
+    public Food(double xPosition, double yPosition, double height, double width, Color paint, double scoreValue, double addedlength) {
         super(xPosition, yPosition, height, width);
         this.paint = paint;
         this.scoreValue = scoreValue;
+        this.addedlength = addedlength;
     }
 
     /**
@@ -33,5 +35,10 @@ public class Food extends Sprite implements Foods{  //TODO the circle could beco
     @Override
     public double getScoreValue() {
         return scoreValue;
+    }
+
+    @Override
+    public double getAddedLength() {
+        return addedlength;
     }
 }

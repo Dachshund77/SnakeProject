@@ -63,4 +63,12 @@ public interface BoardModels {
     boolean addTimeMoveable(TimeMoveable tm);
 
     boolean addFood(Foods f);
+
+    double getHeight();
+
+    double getWidth();
+
+    double getRandomY();
+
+    double getRandomX();
 }

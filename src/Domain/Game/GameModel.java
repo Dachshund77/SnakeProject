@@ -1,6 +1,7 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
+import Domain.Food.Food;
 import Domain.Moveable.Moveables;
 import Domain.PlayerEntity.PlayerEntities;
 import Domain.TimeMovable.TimeMoveable;
@@ -102,9 +103,19 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
             double newSnakeBodyHeight = snakeHead.getHeight(); //Could technicly be smaller then the snakehead
             double newSnakeBodyWidth = snakeHead.getWidth(); //Could technicly be smaller then the snakehead
             double snakeHeadSpeed = snakeHead.getSpeed();
+            double bodyLength = snakeHead.getBodyLength();
             double noCollisionTime = ((newSnakeBodyWidth + snakeHeadWidth) / snakeHeadSpeed) + ((newSnakeBodyHeight + snakeHeadHeight) / snakeHeadSpeed);
-            boardModel.addTimeable(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, 1000, noCollisionTime));
+            boardModel.addTimeable(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, noCollisionTime));
         }
+    }
+
+    @Override
+    public void spawnNextFood(){
+        double x = boardModel.getRandomX();
+        double y = boardModel.getRandomY();
+
+        Food food = new Food(x,y,10,10,Color.GREEN,100,500);
+        boardModel.addFood(food);
     }
 
     @Override

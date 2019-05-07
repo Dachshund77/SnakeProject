@@ -21,9 +21,13 @@ public interface GameModels {
      */
     BoardModels getBoardModel();
 
+    void spawnNextFood();
+
     void handleGameEnd();
 
     boolean isGameOver();
 
     IntegerProperty scoreProperty();
+
+
 }

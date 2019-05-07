@@ -13,11 +13,13 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     private SnakeControl controls;
     private double blockedTimeRemaining;
     private KeyCode nextAction;
+    private double bodyLength;
 
-    public SnakeHead(double xPosition, double yPosition, double height, double width, String name, Color paint, double speed, SnakeControl controls) {
+    public SnakeHead(double xPosition, double yPosition, double height, double width, String name, Color paint, double speed, SnakeControl controls, double bodyLength) {
         super(xPosition, yPosition, height, width, speed, name);
         this.paint = paint;
         this.controls = controls;
+        this.bodyLength = bodyLength;
     }
 
     /**
@@ -71,10 +73,19 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
         }
     }
 
+    public double getBodyLength() {
+        return bodyLength;
+    }
+
     @Override
     public void handleCollision(Sprites s, GameModels gameModels) {
         if (s instanceof Foods) {
-            System.out.println("FOUND FOOOOOOD"); //TODO propper implentation
+            Foods f = (Foods) s;
+            bodyLength += f.getAddedLength();
+            int curretScore = gameModels.scoreProperty().get();
+            gameModels.scoreProperty().set((int) (curretScore+f.getScoreValue()));
+            gameModels.getBoardModel().removeFood(f);
+            gameModels.spawnNextFood();
         } else {
             gameModels.handleGameEnd();
         }

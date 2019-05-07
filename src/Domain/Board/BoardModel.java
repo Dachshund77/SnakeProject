@@ -12,6 +12,7 @@ import Domain.Timeable.Timeables;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 
 public abstract class BoardModel implements BoardModels { //TODO could have better control to prevent pollution
@@ -155,11 +156,25 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return foods.add(f);
     }
 
+    @Override
     public double getHeight() {
         return height;
     }
 
+    @Override
     public double getWidth() {
         return width;
+    }
+
+    @Override
+    public double getRandomY(){
+        Random r = new Random();
+        return 20 + (height - 20) * r.nextDouble();
+    }
+
+    @Override
+    public double getRandomX(){
+        Random r = new Random();
+        return 20 + (width - 20) * r.nextDouble();
     }
 }
