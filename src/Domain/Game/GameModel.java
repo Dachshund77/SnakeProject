@@ -109,6 +109,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         gameOver = true;
     }
 
+    @Override
     public boolean isGameOver() {
         return gameOver;
     }

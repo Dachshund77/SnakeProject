@@ -58,7 +58,7 @@ public class Controller {
             @Override
             public void handle(long currentNanoTime) { //TODO possible rewrite this with timelines and keyframes. More control over fps.
                 // ask if the game has ended
-                if (gameModel.hasEnded()){
+                if (gameModel.isGameOver()){
                     stop();
                 }
 

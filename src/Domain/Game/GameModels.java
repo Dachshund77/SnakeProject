@@ -20,7 +20,7 @@ public interface GameModels {
      */
     BoardModels getBoardModel();
 
-    boolean hasEnded();
-
     void handleGameEnd();
+
+    boolean isGameOver();
 }
