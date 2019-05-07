@@ -105,7 +105,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     }
 
     private void handleGameEnd(){
-
+        gameOver = true;
     }
 
     public boolean isGameOver() {
