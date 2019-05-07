@@ -11,6 +11,8 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
 
     private Color paint;
     private SnakeControl controls;
+    private double blockedTimeRemaining;
+    private KeyCode nextAction;
 
     public SnakeHead(double xPosition, double yPosition, double height, double width, String name, Color paint, double speed, SnakeControl controls) {
         super(xPosition, yPosition, height, width, speed, name);
@@ -34,25 +36,44 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     }
 
     @Override
+    public void move(long time) {
+        super.move(time);
+        if (blockedTimeRemaining >= 0) {
+            blockedTimeRemaining -= time;
+        }else if(nextAction != null) {
+            handleUserInput(nextAction);
+        }
+    }
+
+    @Override
     public void handleUserInput(KeyCode keyCode) {
-        if (keyCode.equals(controls.getUp())) {
-            xVelocity = 0;
-            yVelocity = -speed;
-        } else if (keyCode.equals(controls.getDown())) {
-            xVelocity = 0;
-            yVelocity = speed;
-        } else if (keyCode.equals(controls.getLeft())) {
-            xVelocity = -speed;
-            yVelocity = 0;
-        } else if (keyCode.equals(controls.getRight())) {
-            xVelocity = speed;
-            yVelocity = 0;
+        if (blockedTimeRemaining < 0) {
+            if (keyCode.equals(controls.getUp()) && yVelocity == 0) {
+                xVelocity = 0;
+                yVelocity = -speed;
+                blockedTimeRemaining = height / speed;
+            } else if (keyCode.equals(controls.getDown()) && yVelocity == 0) {
+                xVelocity = 0;
+                yVelocity = speed;
+                blockedTimeRemaining = height / speed;
+            } else if (keyCode.equals(controls.getLeft()) && xVelocity == 0) {
+                xVelocity = -speed;
+                yVelocity = 0;
+                blockedTimeRemaining = width / speed;
+            } else if (keyCode.equals(controls.getRight()) && xVelocity == 0) {
+                xVelocity = speed;
+                yVelocity = 0;
+                blockedTimeRemaining = width / speed;
+            }
+            nextAction = null;
+        } else {
+            nextAction = keyCode;
         }
     }
 
     @Override
     public void handleCollision(Sprites s, GameModels gameModels) {
-        if (s instanceof Foods){
+        if (s instanceof Foods) {
             System.out.println("FOUND FOOOOOOD"); //TODO propper implentation
         } else {
             System.out.println(s.getClass());
