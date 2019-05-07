@@ -22,4 +22,9 @@ public class Food extends Sprite {  //TODO the circle could become a image or so
         gc.setFill(paint);
         gc.fillRect(xPosition,yPosition,width,height);
     }
+
+    @Override
+    public void setPaint(Color paint) {
+        System.out.println("JUST FOR TESTING");
+    }
 }

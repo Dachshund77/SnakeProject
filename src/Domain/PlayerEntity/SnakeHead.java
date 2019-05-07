@@ -29,6 +29,11 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     }
 
     @Override
+    public void setPaint(Color paint) {
+        System.out.println("JUST FORTESTING");
+    }
+
+    @Override
     public void handleUserInput(KeyCode keyCode) {
         if (keyCode.equals(controls.getUp())) {
             xVelocity = 0;
@@ -50,7 +55,7 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
         if (s instanceof Foods){
             System.out.println("FOUND FOOOOOOD"); //TODO propper implentation
         } else {
-            System.out.println("GAAAAAAAAAME OOOOOOOOOVER");
+            System.out.println(s.getClass());
         }
     }
 }

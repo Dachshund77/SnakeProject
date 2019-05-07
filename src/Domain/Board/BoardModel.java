@@ -100,7 +100,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     public ArrayList<Moveables> getAllMoveables() {
         ArrayList<Moveables> returnArrayList = new ArrayList<>();
 
-        returnArrayList.addAll( playerEntities);
+        returnArrayList.addAll(playerEntities);
         returnArrayList.addAll(movables);
         returnArrayList.addAll(timeMovables);
 

@@ -38,4 +38,8 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
             return super.intersects(s);
         }
     }
+
+    public void setPaint(Color paint) {
+        this.paint = paint;
+    }
 }

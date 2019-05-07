@@ -1,11 +1,10 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
-import Domain.Moveable.Moveable;
 import Domain.Moveable.Moveables;
 import Domain.PlayerEntity.PlayerEntities;
+import Domain.TimeMovable.TimeMoveable;
 import Domain.Timeable.SnakeBody;
-import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.SnakeHead;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeable;
@@ -57,11 +56,24 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     private void updateTimeables(long milSecPassed) {
         // Update Timeables
-        ArrayList<Timeables> timeables = boardModel.getAllTimeAbles();
+        ArrayList<Timeables> timeables = boardModel.getTimeables();
         for (Iterator<Timeables> iterator = timeables.iterator(); iterator.hasNext();){
             Timeable timeable = (Timeable) iterator.next();
             timeable.update(milSecPassed);
+            if (timeable.getCollisionIgnoranceTime() < timeable.getCurrentLifetime()){
+                timeable.setPaint(Color.BLUE);
+            }
             if (timeable.getCurrentLifetime() > timeable.getMaxLifeTime()){
+                iterator.remove();
+            }
+        }
+
+        // Update TimeMovables
+        ArrayList<TimeMoveable> timeMovables = boardModel.getTimeMovables();
+        for (Iterator<TimeMoveable> iterator = timeMovables.iterator(); iterator.hasNext();){
+            Timeables tempTimeables = iterator.next();
+            tempTimeables.update(milSecPassed);
+            if (tempTimeables.getCurrentLifetime() > tempTimeables.getMaxLifeTime()){
                 iterator.remove();
             }
         }
@@ -72,7 +84,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         ArrayList<Sprites> sprites = boardModel.getAllSprites();
         for (Moveables moveable : moveables) {
             for (Sprites sprite : sprites) {
-                if(moveable.intersects(sprite) && moveable.equals(sprite)) {
+                if(sprite.intersects(moveable) && !moveable.equals(sprite)) {
                     moveable.handleCollision(sprite,this);
                 }
             }

@@ -3,6 +3,7 @@ package Domain.Sprite;
 import Domain.Game.GameModels;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  * Interface for the Sprites in the game. A Sprite can have an image or a shape as visual representation.
@@ -28,5 +29,5 @@ public interface Sprites {
      */
     boolean intersects(Sprites s);
 
-    //void handleCollision(Sprites s, GameModels gameModels);
+    void setPaint(Color paint);
 }
