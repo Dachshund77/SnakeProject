@@ -94,7 +94,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     private void placeSnakeBody(SnakeHead snakeHead) {
         // Only place if in movement
-        if (snakeHead.getxVelocity() != 0 && snakeHead.getyVelocity() != 0) {
+        if (snakeHead.getxVelocity() != 0 || snakeHead.getyVelocity() != 0) {
             double tempxPosition = snakeHead.getxPosition();
             double tempyPosition = snakeHead.getyPosition();
             double snakeHeadHeight = snakeHead.getHeight();
