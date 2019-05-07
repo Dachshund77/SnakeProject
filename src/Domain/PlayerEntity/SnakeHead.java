@@ -76,7 +76,7 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
         if (s instanceof Foods) {
             System.out.println("FOUND FOOOOOOD"); //TODO propper implentation
         } else {
-            System.out.println(s.getClass());
+            gameModels.handleGameEnd();
         }
     }
 }
