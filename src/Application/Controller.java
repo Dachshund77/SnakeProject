@@ -86,7 +86,7 @@ public class Controller {
         KeyCode keyCode = keyEvent.getCode();
 
         // For each player entity we look if it does something
-        ArrayList<MoveablePlayerEntity> playerEntities = gameModel.getBoardModel().getMovablePlayerEntities();
+        ArrayList<PlayerEntities> playerEntities = gameModel.getBoardModel().getMovablePlayerEntities();
         for (PlayerEntities p : playerEntities) {
             p.handleUserInput(keyCode);
         }

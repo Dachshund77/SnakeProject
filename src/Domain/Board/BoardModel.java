@@ -26,6 +26,17 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     private ArrayList<TimeMoveable> timeMovables;
     private ArrayList<Foods> foods; //TODO should be split at some point into moveable food and timeable food
 
+    public BoardModel(double height, double width) {
+        this.height = height;
+        this.width = width;
+        this.sprites = new ArrayList<>();
+        this.playerEntities = new ArrayList<>();
+        this.movables = new ArrayList<>();
+        this.timeables = new ArrayList<>();
+        this.timeMovables = new ArrayList<>();
+        this.foods = new ArrayList<>();
+    }
+
     @Override
     public ArrayList<Sprites> getSprites() {
         return sprites;
@@ -89,7 +100,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     public ArrayList<Moveables> getAllMoveables() {
         ArrayList<Moveables> returnArrayList = new ArrayList<>();
 
-        returnArrayList.addAll((Collection<? extends Moveable>) playerEntities);
+        returnArrayList.addAll( playerEntities);
         returnArrayList.addAll(movables);
         returnArrayList.addAll(timeMovables);
 
@@ -100,7 +111,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return sprites.remove(s);
     }
 
-    public boolean removePlayerEntity(MoveablePlayerEntity movablePlayerEntity) {
+    public boolean removePlayerEntity(PlayerEntities movablePlayerEntity) {
         return playerEntities.remove(movablePlayerEntity);
     }
 
@@ -124,7 +135,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return sprites.add(s);
     }
 
-    public boolean addPlayerEntity(MoveablePlayerEntity p) {
+    public boolean addPlayerEntity(PlayerEntities p) {
         return playerEntities.add(p);
     }
 

@@ -42,7 +42,7 @@ public interface BoardModels {
 
     boolean removeSprite(Sprites s);
 
-    boolean removePlayerEntity(MoveablePlayerEntity movablePlayerEntity);
+    boolean removePlayerEntity(PlayerEntities p);
 
     boolean removeMoveable(Moveable m);
 
@@ -54,7 +54,7 @@ public interface BoardModels {
 
     boolean addSprite(Sprites s);
 
-    boolean addPlayerEntity(MoveablePlayerEntity p);
+    boolean addPlayerEntity(PlayerEntities p);
 
     boolean addMoveable(Moveable m);
 

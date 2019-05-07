@@ -37,16 +37,9 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         // Update TimeAbles
         updateTimeables(milSecPassed);
 
-        //get any collision with player enteties
+        //get any collision for moveables
         detectCollision();
 
-        SnakeHead snakeHead = boardModel.getSnakeHead(); //TODO to be unfucked later
-        ArrayList<Sprites> sprites = boardModel.getSprites();
-        for (Sprites sprite : sprites) {
-            if (sprite.intersects(snakeHead)) { //The order of this actual matters
-                System.out.println("Snakehead intersects with " + sprite.getClass().getName());
-            }
-        }
     }
 
     @Override
@@ -79,14 +72,13 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         ArrayList<Sprites> sprites = boardModel.getAllSprites();
         for (Moveables moveable : moveables) {
             for (Sprites sprite : sprites) {
-                moveable.
+                if(moveable.intersects(sprite) && moveable.equals(sprite)) {
+                    moveable.handleCollision(sprite,this);
+                }
             }
         }
     }
 
-    private void handeCollision(){
-
-    }
 
     private void placeSnakeBody(SnakeHead snakeHead) {
         double tempxPosition = snakeHead.getxPosition();

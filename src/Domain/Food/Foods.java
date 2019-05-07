@@ -1,4 +1,6 @@
 package Domain.Food;
 
-public interface Foods {
+import Domain.Sprite.Sprites;
+
+public interface Foods extends Sprites {
 }

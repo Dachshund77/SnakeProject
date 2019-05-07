@@ -1,5 +1,8 @@
 package Domain.PlayerEntity;
 
+import Domain.Food.Foods;
+import Domain.Game.GameModels;
+import Domain.Sprite.Sprites;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -39,6 +42,15 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
         } else if (keyCode.equals(controls.getRight())) {
             xVelocity = speed;
             yVelocity = 0;
+        }
+    }
+
+    @Override
+    public void handleCollision(Sprites s, GameModels gameModels) {
+        if (s instanceof Foods){
+            System.out.println("FOUND FOOOOOOD"); //TODO propper implentation
+        } else {
+            System.out.println("GAAAAAAAAAME OOOOOOOOOVER");
         }
     }
 }

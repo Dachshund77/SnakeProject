@@ -1,5 +1,6 @@
 package Domain.Sprite;
 
+import Domain.Game.GameModels;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -26,4 +27,6 @@ public interface Sprites {
      * @return true if the Sprites are overlapping
      */
     boolean intersects(Sprites s);
+
+    //void handleCollision(Sprites s, GameModels gameModels);
 }
