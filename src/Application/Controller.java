@@ -45,6 +45,7 @@ public class Controller {
      */
     public void handleNewGame(ActionEvent event) {
         gameModel = new BasicGame(new BasicBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
+        scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
         startGameLoop();
     }
 
