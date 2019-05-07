@@ -1,6 +1,7 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
+import javafx.beans.property.IntegerProperty;
 
 /**
  * Interface access for different gameModels.
@@ -23,4 +24,6 @@ public interface GameModels {
     void handleGameEnd();
 
     boolean isGameOver();
+
+    IntegerProperty scoreProperty();
 }
