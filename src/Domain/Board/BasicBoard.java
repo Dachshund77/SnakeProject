@@ -26,7 +26,7 @@ public class BasicBoard extends BoardModel {
     public BasicBoard(double height, double width) {
         super(height, width);
 
-        SnakeHead snakeHead = new SnakeHead(width / 2, height / 2, height * 0.05, width * 0.05, "Player 1", Color.RED, 0.1,
+        SnakeHead snakeHead = new SnakeHead(width / 2, height / 2, 10, 10, "Player 1", Color.RED, 0.1,
                 new SnakeControl(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT));
 
         addPlayerEntity(snakeHead);
