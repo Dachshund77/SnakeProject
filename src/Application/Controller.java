@@ -57,6 +57,11 @@ public class Controller {
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) { //TODO possible rewrite this with timelines and keyframes. More control over fps.
+                // ask if the game has ended
+                if (gameModel.hasEnded()){
+                    stop();
+                }
+
                 // set needed value to keep track of time pased
 
                 long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
