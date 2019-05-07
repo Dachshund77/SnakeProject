@@ -104,7 +104,8 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         boardModel.addTimeable(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, 1000,noCollisionTime));
     }
 
-    private void handleGameEnd(){
+    @Override
+    public void handleGameEnd(){
         gameOver = true;
     }
 

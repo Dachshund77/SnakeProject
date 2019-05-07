@@ -22,4 +22,5 @@ public interface GameModels {
 
     boolean hasEnded();
 
+    void handleGameEnd();
 }
