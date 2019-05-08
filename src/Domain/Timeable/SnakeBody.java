@@ -32,10 +32,18 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
      */
     @Override
     public boolean intersects(Sprites s) {
-        if (collisionIgnoranceTime >= currentLifetime){
+        if (collisionIgnoranceTime > 0){
             return false;
         } else {
             return super.intersects(s);
+        }
+    }
+
+    @Override
+    public void update(long time) {
+        super.update(time);
+        if (currentLifetime < 0){
+            isRemoved = true;
         }
     }
 

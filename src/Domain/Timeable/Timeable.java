@@ -18,29 +18,17 @@ public abstract class Timeable extends Sprite implements Timeables {
     @Override
     public void update(long time) {
         currentLifetime += time;
+        if (collisionIgnoranceTime > 0) {
+            collisionIgnoranceTime -= time;
+        }
     }
 
     public double getMaxLifeTime() {
         return maxLifeTime;
     }
 
-    public void setMaxLifeTime(double maxLifeTime) {
-        this.maxLifeTime = maxLifeTime;
-    }
-
     public double getCurrentLifetime() {
         return currentLifetime;
     }
 
-    public void setCurrentLifetime(double currentLifetime) {
-        this.currentLifetime = currentLifetime;
-    }
-
-    public double getCollisionIgnoranceTime() {
-        return collisionIgnoranceTime;
-    }
-
-    public void setCollisionIgnoranceTime(double collisionIgnoranceTime) {
-        this.collisionIgnoranceTime = collisionIgnoranceTime;
-    }
 }
