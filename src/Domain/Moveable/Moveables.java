@@ -4,6 +4,7 @@ import Domain.Game.GameModels;
 import Domain.Sprite.Sprites;
 
 public interface Moveables extends Sprites{
+
     void move(long time, GameModels gameModels);
 
     /**

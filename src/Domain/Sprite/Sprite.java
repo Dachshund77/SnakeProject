@@ -9,10 +9,8 @@ public abstract class Sprite implements Sprites{
 
     protected double xPosition;
     protected double yPosition;
-
     protected double height;
     protected double width;
-
     protected boolean isRemoved;
 
     public Sprite(double xPosition, double yPosition, double height, double width) {
