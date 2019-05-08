@@ -11,6 +11,9 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * The main entity a player will control. This SnakeHead is also in charge of placing its tail.
+ */
 public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could become a image or something
 
     private Color paint;
@@ -18,6 +21,10 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     private double blockedTimeRemaining;
     private KeyCode nextAction;
     private double bodyLength;
+
+    /**
+     * ArrayList to give easy Reference acces to the {@link SnakeBody snakeBodies} that were placed by this snakeHead.
+     */
     private ArrayList<SnakeBody> tail;
 
     public SnakeHead(double xPosition, double yPosition, double height, double width, String name, Color paint, double speed, SnakeControl controls, double bodyLength) {
@@ -30,14 +37,26 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
 
     /**
      * {@inheritDoc}
+     * <br><br>
      * In this case the render method will draw a circle.
      */
     @Override
-    public void render(GraphicsContext gc) { //TODO snakeHead should be in charge of placing bodies
+    public void render(GraphicsContext gc) {
         gc.setFill(paint);
         gc.fillOval(xPosition, yPosition, width, height);
     }
 
+    /**
+     *{@inheritDoc}
+     * <br><br>
+     * This method will in order
+     * <ul>
+     *     <li>Place a new {@link SnakeBody}</li>
+     *     <li>Remove timedOut bodies from its {@link #tail}</li>
+     *     <li>Move the SnakeHead</li>
+     *     <li>Decrement the blocked time if blocked</li>
+     * </ul>
+     */
     @Override
     public void move(long time, GameModels gameModels) {
         // adding an snakebody to the tail
@@ -80,32 +99,43 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
         }
     }
 
+    /**
+     *{@inheritDoc}
+     * <br><br>
+     * In this case the Snake can Move in all Cardinal Directions. If the Snake change direction it will be briefly blocked.
+     */
     @Override
     public void handleUserInput(KeyCode keyCode) {
-        if (blockedTimeRemaining < 0) {
-            if (keyCode.equals(controls.getUp()) && yVelocity == 0) {
+        if (blockedTimeRemaining < 0) { //If its not blocked than do
+            if (keyCode.equals(controls.getUp()) && yVelocity == 0) { //Upwards movement
                 xVelocity = 0;
                 yVelocity = -speed;
                 blockedTimeRemaining = height / speed;
-            } else if (keyCode.equals(controls.getDown()) && yVelocity == 0) {
+            } else if (keyCode.equals(controls.getDown()) && yVelocity == 0) { //Down Movement
                 xVelocity = 0;
                 yVelocity = speed;
                 blockedTimeRemaining = height / speed;
-            } else if (keyCode.equals(controls.getLeft()) && xVelocity == 0) {
+            } else if (keyCode.equals(controls.getLeft()) && xVelocity == 0) { //Left Movement
                 xVelocity = -speed;
                 yVelocity = 0;
                 blockedTimeRemaining = width / speed;
-            } else if (keyCode.equals(controls.getRight()) && xVelocity == 0) {
+            } else if (keyCode.equals(controls.getRight()) && xVelocity == 0) { //Right Movement
                 xVelocity = speed;
                 yVelocity = 0;
                 blockedTimeRemaining = width / speed;
             }
             nextAction = null;
         } else {
-            nextAction = keyCode;
+            nextAction = keyCode; // We are storing this to smooth out the user input.
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * In this case the SnakeHead will react on Foods, gaining length and score.
+     * Any other collision will result in the death of the SnakeHead.
+     */
     @Override
     public void handleCollision(Sprites s, GameModels gameModels) {
         if (s instanceof Foods) {

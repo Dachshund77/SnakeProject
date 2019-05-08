@@ -6,6 +6,9 @@ import Domain.Moveable.Moveables;
 import Domain.Sprite.Sprites;
 import javafx.geometry.Rectangle2D;
 
+/**
+ * Abstract class with shared implementations for all MovablesPlayerEntities
+ */
 public abstract class MoveablePlayerEntity implements PlayerEntities, Moveables, Sprites {//TODO need javaDoc
 
     //From PlayerEnteties interface
@@ -32,14 +35,6 @@ public abstract class MoveablePlayerEntity implements PlayerEntities, Moveables,
         this.xVelocity = 0;
         this.yVelocity = 0;
         this.speed = speed;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 

@@ -6,7 +6,12 @@ import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeables;
 import javafx.geometry.Rectangle2D;
 
-public abstract class TimeMoveable implements Timeables, Moveables, Sprites {//TODO not realy finished implementation
+/**
+ * Abstract class for shared implementation of all TimeMovables.
+ * @see Timeables
+ * @see Moveables
+ */
+public abstract class TimeMoveable implements Timeables, Moveables, Sprites {//TODO nothing is kinda using this
 
     // From interface Sprites
     protected double xPosition;
