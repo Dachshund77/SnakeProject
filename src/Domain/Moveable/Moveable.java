@@ -4,6 +4,10 @@ import Domain.Game.GameModels;
 import Domain.Sprite.Sprites;
 import javafx.geometry.Rectangle2D;
 
+
+/**
+ * Abstract class with shared implementation for all Movables.
+ */
 public abstract class Moveable implements Moveables, Sprites {
 
     // From interface Sprites
