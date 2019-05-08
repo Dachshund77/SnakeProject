@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Actual implementation of the Board state. //TODO improve docs
+ * Actual implementation of the Board state.
+ * This will add a single snakeHead to the game.
  */
 public class BasicBoard extends BoardModel {
 
