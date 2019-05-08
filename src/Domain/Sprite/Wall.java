@@ -3,6 +3,10 @@ package Domain.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * Simple wall sprite that is just a rectangle.
+ * Can be used to dra the Edges of the Board.
+ */
 public class Wall extends Sprite {
 
     private Color paint;
