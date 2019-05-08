@@ -55,7 +55,6 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
             SnakeBody body = new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, noCollisionTime);
             gameModels.addSpriteQue(body);
             tail.add(body);
-            System.out.println("tail size: "+tail.size());
         }
 
         //Cleaning up the tail references
@@ -65,7 +64,6 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
             SnakeBody snakeBody = iterator.next();
             if (snakeBody.getCurrentLifetime() > snakeBody.getMaxLifeTime()) {
                 iterator.remove();
-                System.out.println("Removing from tail");
             } else {
                 break;
             }

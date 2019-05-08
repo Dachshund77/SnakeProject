@@ -83,7 +83,6 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     public void detectGameEnd() {
         if (boardModel.getMovablePlayerEntities().size() == 0) {
             gameOver = true;
-            System.out.println("GAME OVER");
         }
     }
 
