@@ -1,24 +1,52 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
-import Domain.Food.Food;
 import Domain.Moveable.Moveables;
-import Domain.Timeable.SnakeBody;
-import Domain.PlayerEntity.SnakeHead;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeables;
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
-public abstract class GameModel implements GameModels { //TODO need JavaDoc
+/**
+ * Abstract class that contains the common implementations for GameModels.
+ * @see GameModels
+ */
+public abstract class GameModel implements GameModels {
 
+    /**
+     * Field to store the BoardModels. The BoardModels are container to store all Sprites.
+     * @see BoardModels
+     */
     BoardModels boardModel;
-    private boolean gameOver = false;
-    ArrayList<Sprites> addQue = new ArrayList<>();
 
+    /**
+     * Flag that signals if the game is over. Set by {@link #detectGameEnd()}.
+     */
+    private boolean gameOver = false;
+
+    /**
+     * ArrayList used to avoid ConcurrentModificationExceptions. The que will be emptied with each call of {@link #updateGameState(long)}
+     * and added to the Board.
+     * Any sprites that should be added to the Board should be done via {@link #addSpriteQue(Sprites)}.
+     */
+    private ArrayList<Sprites> addQue = new ArrayList<>();
+
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * In order this method will:
+     * <ul>
+     *     <li>{@link Timeables#update(long, GameModels) Update} all {@link Timeables}</li>
+     *     <li>{@link Moveables#move(long, GameModels) Move} all {@link Moveables}</li>
+     *     <li>Add the Sprites in the {@link #addQue}</li>
+     *     <li>Remove {@link Sprites} with the {@link Sprites#isRemoved() isRemoved} flag raised.</li>
+     *     <li>Detect Collision via {@link #detectCollision(Moveables, ArrayList)}</li>
+     *     <li>Spawn Food via {@link #spawnNextFood()}</li>
+     *     <li>Detect game end via {@link #detectGameEnd()}</li>
+     * </ul>
+     * @param milSecPassed Milliseconds passed since last call.
+     */
     @Override
-    public void updateGameState(long milSecPassed) { //TODO clean up
+    public void updateGameState(long milSecPassed) {
         //Track needed values
         ArrayList<Moveables> moveablesArrayList = new ArrayList<>();
         ArrayList<Sprites> toBeRemoved = new ArrayList<>();
@@ -65,12 +93,22 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         detectGameEnd();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BoardModels getBoardModel() {
         return boardModel;
     }
 
+    /**
+     * Helper method that handel's the detection of collision, given a {@link Moveables}.
+     * The detection is done with the help of {@link Sprites#intersects(Sprites)}.
+     * This method will call the Movables {@link Moveables#handleCollision(Sprites, GameModels) handleCollision} method,
+     * if a Collision is detected.
+     * @param moveable The movables we want to detect a Collisions for.
+     * @param sprites A list of Sprites we want to check against our Movable.
+     */
     private void detectCollision(Moveables moveable, ArrayList<Sprites> sprites) {
         for (Sprites sprite : sprites) {
             if (sprite.intersects(moveable) && !moveable.equals(sprite)) {
@@ -79,6 +117,12 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * This implementation will raise the {@link #gameOver} flag only if the are no Player Entities left on the Board.
+     * @see BoardModels
+     */
     @Override
     public void detectGameEnd() {
         if (boardModel.getMovablePlayerEntities().size() == 0) {
@@ -86,11 +130,20 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         }
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     * @return The value of {@link #gameOver} field.
+     */
     @Override
     public boolean isGameOver() {
         return gameOver;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see  #addQue
+     */
     @Override
     public boolean addSpriteQue(Sprites s) {
          return addQue.add(s);
