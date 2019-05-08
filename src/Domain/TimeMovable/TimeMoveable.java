@@ -1,5 +1,6 @@
 package Domain.TimeMovable;
 
+import Domain.Game.GameModels;
 import Domain.Moveable.Moveable;
 import Domain.Timeable.Timeables;
 
@@ -18,7 +19,7 @@ public abstract class TimeMoveable extends Moveable implements Timeables {//TODO
     }
 
     @Override
-    public void update(long time) {
+    public void update(long time, GameModels gameModels) {
         currentLifetime += time;
     }
 

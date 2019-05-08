@@ -1,11 +1,10 @@
 package Domain.Moveable;
 
 import Domain.Game.GameModels;
-import Domain.Sprite.Sprite;
 import Domain.Sprite.Sprites;
 
 public interface Moveables extends Sprites{
-    void move(long time);
+    void move(long time, GameModels gameModels);
 
     /**
      * Method to determine if two Sprites are overlapping.

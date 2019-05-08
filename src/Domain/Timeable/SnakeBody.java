@@ -1,5 +1,6 @@
 package Domain.Timeable;
 
+import Domain.Game.GameModels;
 import Domain.Sprite.Sprites;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -40,14 +41,14 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
     }
 
     @Override
-    public void update(long time) {
-        super.update(time);
-        if (currentLifetime < 0){
+    public void update(long time, GameModels gameModels) {
+        super.update(time, gameModels);
+        if (collisionIgnoranceTime < 0){
+            paint = Color.GREEN;
+        }
+        if (currentLifetime > maxLifeTime){
             isRemoved = true;
         }
     }
 
-    public void setPaint(Color paint) {
-        this.paint = paint;
-    }
 }

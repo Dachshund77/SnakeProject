@@ -18,8 +18,4 @@ public class Wall extends Sprite {
         gc.fillRect(xPosition,yPosition,width,height);
     }
 
-    @Override
-    public void setPaint(Color paint) {
-        this.paint = paint;
-    }
 }

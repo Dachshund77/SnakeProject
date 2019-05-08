@@ -28,11 +28,6 @@ public class Food extends Sprite implements Foods{  //TODO the circle could beco
     }
 
     @Override
-    public void setPaint(Color paint) {
-        System.out.println("JUST FOR TESTING");
-    }
-
-    @Override
     public double getScoreValue() {
         return scoreValue;
     }

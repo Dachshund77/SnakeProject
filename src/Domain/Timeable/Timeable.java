@@ -1,5 +1,6 @@
 package Domain.Timeable;
 
+import Domain.Game.GameModels;
 import Domain.Sprite.Sprite;
 
 public abstract class Timeable extends Sprite implements Timeables {
@@ -16,7 +17,7 @@ public abstract class Timeable extends Sprite implements Timeables {
     }
 
     @Override
-    public void update(long time) {
+    public void update(long time, GameModels gameModels) {
         currentLifetime += time;
         if (collisionIgnoranceTime > 0) {
             collisionIgnoranceTime -= time;

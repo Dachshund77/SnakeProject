@@ -1,5 +1,6 @@
 package Domain.Moveable;
 
+import Domain.Game.GameModels;
 import Domain.Sprite.Sprite;
 
 public abstract class Moveable extends Sprite implements Moveables{
@@ -16,7 +17,7 @@ public abstract class Moveable extends Sprite implements Moveables{
     }
 
     @Override
-    public void move(long time) {
+    public void move(long time, GameModels gameModels) {
         xPosition += xVelocity * time;
         yPosition += yVelocity * time;
     }

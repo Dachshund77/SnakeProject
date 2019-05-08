@@ -1,6 +1,7 @@
 package Domain.Game;
 
 import Domain.Board.BoardModels;
+import Domain.Sprite.Sprites;
 import javafx.beans.property.IntegerProperty;
 
 /**
@@ -29,5 +30,6 @@ public interface GameModels {
 
     IntegerProperty scoreProperty();
 
+    boolean addSpriteQue(Sprites s);
 
 }
