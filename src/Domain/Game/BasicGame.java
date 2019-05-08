@@ -24,14 +24,9 @@ public class BasicGame extends GameModel { //TODO this class might also be in ch
         spawnNextFood();
     }
 
-
-    /**
-     * {@inheritDoc}
-     */
     public IntegerProperty scoreProperty() {
         return score;
     }
-
 
     /**
      * {@inheritDoc}

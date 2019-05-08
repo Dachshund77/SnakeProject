@@ -93,9 +93,7 @@ public abstract class GameModel implements GameModels {
         detectGameEnd();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public BoardModels getBoardModel() {
         return boardModel;

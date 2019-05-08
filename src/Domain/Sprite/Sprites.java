@@ -30,7 +30,7 @@ public interface Sprites {
     boolean intersects(Sprites s);
 
     /**
-     * Helper Method that we get the isRemoved flag.
+     * Helper Method that we get the value of the isRemoved flag.
      * This flag need to be raised for the {@link Domain.Game.GameModels#updateGameState(long) updateGamestate} to garbageCollect that Sprite.
      * <br>
      * <font color = RED>NOTE</font> That removing a Sprite directly from the {@link Domain.Board.BoardModels BoardModel} will most
@@ -40,7 +40,7 @@ public interface Sprites {
     boolean isRemoved();
 
     /**
-     * Helper method to set the is Removed Flag.
+     * Helper method to set the isRemoved Flag.
      * @param newStatus True or False
      */
     void setIsRemoved(boolean newStatus);

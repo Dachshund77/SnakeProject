@@ -21,6 +21,7 @@ public abstract class Sprite implements Sprites{
         this.isRemoved = false;
     }
 
+
     @Override
     public Rectangle2D getBoundary() {
         return new Rectangle2D(xPosition,yPosition,width,height);
@@ -31,18 +32,18 @@ public abstract class Sprite implements Sprites{
         return s.getBoundary().intersects( this.getBoundary() );
     }
 
-    public double getxPosition() {
-        return xPosition;
-    }
-
-    public double getyPosition() {
-        return yPosition;
-    }
-
+    /**
+     * Helper method to get height of a Sprite.
+     * @return height of Sprite.
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Helper method to get the width of a Sprite.
+     * @return width of Sprite.
+     */
     public double getWidth() {
         return width;
     }
