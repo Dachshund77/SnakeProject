@@ -31,18 +31,6 @@ public class BasicBoard extends BoardModel {
 
         addSprite(snakeHead);
 
-        //Making boundary walls
-        double wallThickness = 1;
-
-        Wall topWall = new Wall(0,0,wallThickness,width,Color.BLACK);
-        Wall bottomWall = new Wall(0,height-wallThickness,wallThickness,width,Color.BLACK);
-        Wall leftWall = new Wall(0,0,height,wallThickness,Color.BLACK);
-        Wall rightWall = new Wall(width-wallThickness,0,height,wallThickness,Color.BLACK);
-
-        addSprite(topWall);
-        addSprite(bottomWall);
-        addSprite(leftWall);
-        addSprite(rightWall);
     }
 }
 

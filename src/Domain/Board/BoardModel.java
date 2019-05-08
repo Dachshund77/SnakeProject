@@ -6,9 +6,11 @@ import Domain.Moveable.Moveables;
 import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
+import Domain.Sprite.Wall;
 import Domain.TimeMovable.TimeMoveable;
 import Domain.Timeable.Timeable;
 import Domain.Timeable.Timeables;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,8 +19,9 @@ import java.util.Random;
 
 public abstract class BoardModel implements BoardModels { //TODO could have better control to prevent pollution
 
-    double height;
-    double width;
+    private double height;
+    private double width;
+    private double wallThickness = 1;
 
     private ArrayList<Sprites> sprites; //RAISE A DELETE
     private ArrayList<PlayerEntities> playerEntities;
@@ -30,6 +33,17 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         this.sprites = new ArrayList<>();
         this.playerEntities = new ArrayList<>();
         this.foods = new ArrayList<>();
+
+        //Making boundary walls
+        Wall topWall = new Wall(0,0,wallThickness,width, Color.BLACK);
+        Wall bottomWall = new Wall(0,height-wallThickness,wallThickness,width,Color.BLACK);
+        Wall leftWall = new Wall(0,0,height,wallThickness,Color.BLACK);
+        Wall rightWall = new Wall(width-wallThickness,0,height,wallThickness,Color.BLACK);
+
+        addSprite(topWall);
+        addSprite(bottomWall);
+        addSprite(leftWall);
+        addSprite(rightWall);
     }
 
     @Override
@@ -82,12 +96,12 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     @Override
     public double getRandomY(){
         Random r = new Random();
-        return 20 + (height - 20) * r.nextDouble();
+        return  (height - (wallThickness+10)) * r.nextDouble();
     }
 
     @Override
     public double getRandomX(){
         Random r = new Random();
-        return 20 + (width - 20) * r.nextDouble();
+        return  (width - (wallThickness+10)) * r.nextDouble();
     }
 }
