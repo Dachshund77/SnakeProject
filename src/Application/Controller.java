@@ -34,12 +34,12 @@ public class Controller {
     @FXML
     public Label scoreCountLabel;
 
-    private GameModels gameModel;
+    private GameModels gameModel; // Game Logic that contains the logic interaction
 
-    private long lastNanoTime = System.nanoTime();
+    private long lastNanoTime = System.nanoTime(); //Needed to calculate the time since last update
 
     /**
-     * Method to start and attach a new gameModels and BordModels to to the Scene.
+     * Method to start and attach a new gameModels and BoardModels to to the Scene.
      *
      * @param event the event that starts this method.
      */
@@ -50,11 +50,11 @@ public class Controller {
     }
 
     /**
-     * Method that initializes the gameLoop and runs it
+     * Method that initializes the gameLoop and runs it. Most notably this method will call {@link GameModels#updateGameState(long)}.
+     * This method will be in charge of drawing the actual Sprites on the canvas.
+     * @see Sprites
      */
     private void startGameLoop() {
-        //Init needed values
-        //Get gc for canvases
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
@@ -63,16 +63,14 @@ public class Controller {
                     stop();
                 }
 
-                // set needed value to keep track of time pased
-
+                // set needed value to keep track of time passed
                 long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
-
                 lastNanoTime = currentNanoTime;
 
-                //Update game
+                //Update game, here the game logic will advance
                 gameModel.updateGameState(timePassedInMilliseconds);
 
-                //Draw on canvas
+                //Clear the canvas of everything
                 GraphicsContext gameCanvasGC = gameCanvas.getGraphicsContext2D();
                 gameCanvasGC.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight()); //Whole canvas
 
@@ -86,6 +84,13 @@ public class Controller {
     }
 
 
+    /**
+     * Method that will register and notify the playerEntities.
+     * Note that it is the entities responsibility to implement a reaction on this method.
+     * @param keyEvent The key pressed.
+     * @see PlayerEntities
+     * @see MoveablePlayerEntity
+     */
     @FXML
     public void handleUserInput(KeyEvent keyEvent) {
         // Get the need values
