@@ -84,10 +84,10 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
             bodyLength += f.getAddedLength();
             int curretScore = gameModels.scoreProperty().get();
             gameModels.scoreProperty().set((int) (curretScore+f.getScoreValue()));
-            gameModels.getBoardModel().removeFood(f);
+            f.setIsRemoved(true);
             gameModels.spawnNextFood();
         } else {
-            gameModels.handleGameEnd();
+            isRemoved = true;
         }
     }
 }

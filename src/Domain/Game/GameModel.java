@@ -3,12 +3,9 @@ package Domain.Game;
 import Domain.Board.BoardModels;
 import Domain.Food.Food;
 import Domain.Moveable.Moveables;
-import Domain.PlayerEntity.PlayerEntities;
-import Domain.TimeMovable.TimeMoveable;
 import Domain.Timeable.SnakeBody;
 import Domain.PlayerEntity.SnakeHead;
 import Domain.Sprite.Sprites;
-import Domain.Timeable.Timeable;
 import Domain.Timeable.Timeables;
 import javafx.scene.paint.Color;
 
@@ -35,15 +32,14 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
 */
         //Track needed values
         ArrayList<Moveables> moveablesArrayList = new ArrayList<>();
+        ArrayList<Sprites> toBeRemoved = new ArrayList<>();
         //Getting needed values
         ArrayList<Sprites> sprites = boardModel.getSprites();
         //We have to use an iterator to avoid ConcurrentModificationException
-        Iterator<Sprites> iterator = sprites.iterator();
-        while (iterator.hasNext()) {
-            Sprites sprite = iterator.next();
+        for (Sprites sprite : sprites) {
             //Testing if the Sprite has been removed
             if (sprite.isRemoved()) {
-                iterator.remove();
+                toBeRemoved.add(sprite);
             } else { //Executing update for that sprites
                 if (sprite instanceof Timeables) {
                     System.out.println("Instance of Timables");
@@ -58,11 +54,18 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
                 }
             }
         }
+        // Garbage collect removed sprites
+        for (Sprites s : toBeRemoved) {
+            boardModel.removeSprite(s);
+        }
+
         //Detecting and acting on Collision
-        for (
-                Moveables moveables : moveablesArrayList) {
+        for (Moveables moveables : moveablesArrayList) {
             detectCollision(moveables, sprites);
         }
+
+        //Detect game end
+        detectGameEnd();
     }
 
 
@@ -92,7 +95,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
             double snakeHeadSpeed = snakeHead.getSpeed();
             double bodyLength = snakeHead.getBodyLength();
             double noCollisionTime = ((newSnakeBodyWidth + snakeHeadWidth) / snakeHeadSpeed) + ((newSnakeBodyHeight + snakeHeadHeight) / snakeHeadSpeed);
-            boardModel.addTimeable(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, noCollisionTime));
+            boardModel.addSprite(new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, noCollisionTime));
         }
     }
 
@@ -102,11 +105,11 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
         double y = boardModel.getRandomY();
 
         Food food = new Food(x, y, 10, 10, Color.GREEN, 100, 500);
-        boardModel.addFood(food);
+        boardModel.addSprite(food);
     }
 
     @Override
-    public void handleGameEnd() {
+    public void detectGameEnd() {
         if (boardModel.getMovablePlayerEntities().size() == 0) {
             gameOver = true;
             System.out.println("GAME OVER");

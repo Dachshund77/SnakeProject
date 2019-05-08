@@ -53,4 +53,9 @@ public abstract class Sprite implements Sprites{
     public boolean isRemoved() {
         return isRemoved;
     }
+
+    @Override
+    public void setIsRemoved(boolean newStatus) {
+        isRemoved = newStatus;
+    }
 }

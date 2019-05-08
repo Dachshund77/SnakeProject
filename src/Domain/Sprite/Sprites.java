@@ -1,6 +1,5 @@
 package Domain.Sprite;
 
-import Domain.Game.GameModels;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -32,4 +31,6 @@ public interface Sprites {
     void setPaint(Color paint);
 
     boolean isRemoved();
+
+    void setIsRemoved(boolean newStatus);
 }

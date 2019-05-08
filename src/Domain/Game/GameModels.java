@@ -23,7 +23,7 @@ public interface GameModels {
 
     void spawnNextFood();
 
-    void handleGameEnd();
+    void detectGameEnd();
 
     boolean isGameOver();
 

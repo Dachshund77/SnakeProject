@@ -29,7 +29,7 @@ public class BasicBoard extends BoardModel {
         SnakeHead snakeHead = new SnakeHead(width / 2, height / 2, 10, 10, "Player 1", Color.RED, 0.1,
                 new SnakeControl(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT),1000);
 
-        addPlayerEntity(snakeHead);
+        addSprite(snakeHead);
 
         //Making boundary walls
         double wallThickness = 1;

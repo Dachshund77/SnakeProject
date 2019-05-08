@@ -78,7 +78,7 @@ public class Controller {
                 gameCanvasGC.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight()); //Whole canvas
 
                 // Draw sprites
-                ArrayList<Sprites> sprites = gameModel.getBoardModel().getAllSprites();
+                ArrayList<Sprites> sprites = gameModel.getBoardModel().getSprites();
                 for (Sprites sprite : sprites) {
                     sprite.render(gameCanvasGC); //TODO need a scale for model to canvas scaling... mb
                 }
