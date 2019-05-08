@@ -57,9 +57,10 @@ public class Controller {
         //Get gc for canvases
         new AnimationTimer() {
             @Override
-            public void handle(long currentNanoTime) { //TODO possible rewrite this with timelines and keyframes. More control over fps.
+            public void handle(long currentNanoTime) {
                 // ask if the game has ended
                 if (gameModel.isGameOver()){
+                    System.out.println("Controller game over");
                     stop();
                 }
 

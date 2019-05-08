@@ -18,11 +18,12 @@ import java.util.Iterator;
 public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     BoardModels boardModel;
-    boolean gameOver = false;
+    private boolean gameOver = false;
 
     @Override
-    public void updateGameState(long milSecPassed) {
-
+    public void updateGameState(long milSecPassed) { //TODO clean up
+        System.out.println("GameModel.updateGameState");
+/*
         // Place a new Snakebody
         ArrayList<PlayerEntities> playerEntities = boardModel.getMovablePlayerEntities();
         for (PlayerEntities playerEntity : playerEntities) {
@@ -31,67 +32,53 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
                 placeSnakeBody(snakeHead);
             }
         }
-
-        //move board aka a move movables
-        moveMovables(milSecPassed);
-
-        // Update TimeAbles
-        updateTimeables(milSecPassed);
-
-        //get any collision for moveables
-        detectCollision();
-
+*/
+        //Track needed values
+        ArrayList<Moveables> moveablesArrayList = new ArrayList<>();
+        //Getting needed values
+        ArrayList<Sprites> sprites = boardModel.getSprites();
+        //We have to use an iterator to avoid ConcurrentModificationException
+        Iterator<Sprites> iterator = sprites.iterator();
+        while (iterator.hasNext()) {
+            Sprites sprite = iterator.next();
+            //Testing if the Sprite has been removed
+            if (sprite.isRemoved()) {
+                iterator.remove();
+            } else { //Executing update for that sprites
+                if (sprite instanceof Timeables) {
+                    System.out.println("Instance of Timables");
+                    Timeables timeables = (Timeables) sprite;
+                    timeables.update(milSecPassed);
+                }
+                if (sprite instanceof Moveables) {
+                    System.out.println("Instance of moveables");
+                    Moveables moveables = (Moveables) sprite;
+                    moveables.move(milSecPassed);
+                    moveablesArrayList.add(moveables);
+                }
+            }
+        }
+        //Detecting and acting on Collision
+        for (
+                Moveables moveables : moveablesArrayList) {
+            detectCollision(moveables, sprites);
+        }
     }
+
 
     @Override
     public BoardModels getBoardModel() {
         return boardModel;
     }
 
-    private void moveMovables(long milSecPassed) {
-        ArrayList<Moveables> moveables = boardModel.getAllMoveables();
-        for (Moveables moveable : moveables) {
-            moveable.move(milSecPassed);
-        }
-
-    }
-
-    private void updateTimeables(long milSecPassed) {
-        // Update Timeables
-        ArrayList<Timeables> timeables = boardModel.getTimeables();
-        for (Iterator<Timeables> iterator = timeables.iterator(); iterator.hasNext();){
-            Timeable timeable = (Timeable) iterator.next();
-            timeable.update(milSecPassed);
-            if (timeable.getCollisionIgnoranceTime() < timeable.getCurrentLifetime()){
-                timeable.setPaint(Color.BLUE);
-            }
-            if (timeable.getCurrentLifetime() > timeable.getMaxLifeTime()){
-                iterator.remove();
-            }
-        }
-
-        // Update TimeMovables
-        ArrayList<TimeMoveable> timeMovables = boardModel.getTimeMovables();
-        for (Iterator<TimeMoveable> iterator = timeMovables.iterator(); iterator.hasNext();){
-            Timeables tempTimeables = iterator.next();
-            tempTimeables.update(milSecPassed);
-            if (tempTimeables.getCurrentLifetime() > tempTimeables.getMaxLifeTime()){
-                iterator.remove();
+    private void detectCollision(Moveables moveable, ArrayList<Sprites> sprites) {
+        for (Sprites sprite : sprites) {
+            if (sprite.intersects(moveable) && !moveable.equals(sprite)) {
+                moveable.handleCollision(sprite, this);
             }
         }
     }
 
-    private void detectCollision() {
-        ArrayList<Moveables> moveables = boardModel.getAllMoveables();
-        ArrayList<Sprites> sprites = boardModel.getAllSprites();
-        for (Moveables moveable : moveables) {
-            for (Sprites sprite : sprites) {
-                if(sprite.intersects(moveable) && !moveable.equals(sprite)) {
-                    moveable.handleCollision(sprite,this);
-                }
-            }
-        }
-    }
 
     private void placeSnakeBody(SnakeHead snakeHead) {
         // Only place if in movement
@@ -110,17 +97,20 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     }
 
     @Override
-    public void spawnNextFood(){
+    public void spawnNextFood() {
         double x = boardModel.getRandomX();
         double y = boardModel.getRandomY();
 
-        Food food = new Food(x,y,10,10,Color.GREEN,100,500);
+        Food food = new Food(x, y, 10, 10, Color.GREEN, 100, 500);
         boardModel.addFood(food);
     }
 
     @Override
-    public void handleGameEnd(){
-        gameOver = true;
+    public void handleGameEnd() {
+        if (boardModel.getMovablePlayerEntities().size() == 0) {
+            gameOver = true;
+            System.out.println("GAME OVER");
+        }
     }
 
     @Override

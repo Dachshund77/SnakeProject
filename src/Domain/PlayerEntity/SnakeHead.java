@@ -27,7 +27,7 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
      * In this case the render method will draw a circle.
      */
     @Override
-    public void render(GraphicsContext gc) {
+    public void render(GraphicsContext gc) { //TODO snakeHead should be in charge of placing bodies
         gc.setFill(paint);
         gc.fillOval(xPosition, yPosition, width, height);
     }
