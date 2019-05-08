@@ -4,6 +4,9 @@ import Domain.Sprite.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * Actual implementation of a simple food object.
+ */
 public class Food extends Sprite implements Foods{  //TODO the circle could become a image or something
 
     private Color paint;
@@ -19,6 +22,7 @@ public class Food extends Sprite implements Foods{  //TODO the circle could beco
 
     /**
      * {@inheritDoc}
+     * <br><br>
      * In this case the render will draw a rectangle
      */
     @Override
