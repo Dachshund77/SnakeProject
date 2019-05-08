@@ -30,4 +30,6 @@ public interface Sprites {
     boolean intersects(Sprites s);
 
     void setPaint(Color paint);
+
+    boolean isRemoved();
 }

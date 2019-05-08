@@ -20,7 +20,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     double height;
     double width;
 
-    private ArrayList<Sprites> sprites;
+    private ArrayList<Sprites> sprites; //RAISE A DELETE
     private ArrayList<PlayerEntities> playerEntities;
     private ArrayList<Moveables> movables;
     private ArrayList<Timeables> timeables;

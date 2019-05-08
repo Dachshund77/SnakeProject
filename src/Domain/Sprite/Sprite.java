@@ -13,11 +13,14 @@ public abstract class Sprite implements Sprites{
     protected double height;
     protected double width;
 
+    protected boolean isRemoved;
+
     public Sprite(double xPosition, double yPosition, double height, double width) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.height = height;
         this.width = width;
+        this.isRemoved = false;
     }
 
     @Override
@@ -46,4 +49,8 @@ public abstract class Sprite implements Sprites{
         return width;
     }
 
+    @Override
+    public boolean isRemoved() {
+        return isRemoved;
+    }
 }
