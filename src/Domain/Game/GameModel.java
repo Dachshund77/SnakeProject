@@ -19,11 +19,6 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
 
     @Override
     public void updateGameState(long milSecPassed) { //TODO clean up
-        // Add sprites that were qued up in the last iteration
-        for (Sprites sprites : addQue) {
-            boardModel.addSprite(sprites);
-        }
-
         //Track needed values
         ArrayList<Moveables> moveablesArrayList = new ArrayList<>();
         ArrayList<Sprites> toBeRemoved = new ArrayList<>();
@@ -47,6 +42,11 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
                 }
             }
         }
+        // Add sprites that were qued up in the main loop
+        for (Sprites s : addQue) {
+            boardModel.addSprite(s);
+        }
+        addQue.clear();
 
         // Garbage collect removed sprites
         for (Sprites s : toBeRemoved) {
@@ -77,7 +77,7 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
     }
 
     @Override
-    public void spawnNextFood() {
+    public void spawnNextFood() { //TODO should be pushed to actual implementation
         double x = boardModel.getRandomX();
         double y = boardModel.getRandomY();
 

@@ -19,7 +19,7 @@ public abstract class Timeable extends Sprite implements Timeables {
     @Override
     public void update(long time, GameModels gameModels) {
         currentLifetime += time;
-        if (collisionIgnoranceTime > 0) {
+        if (collisionIgnoranceTime >= 0) {
             collisionIgnoranceTime -= time;
         }
     }
