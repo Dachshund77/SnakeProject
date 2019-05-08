@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Interface for the Sprites in the game. A Sprite can have an image or a shape as visual representation.
+ * Each an every Element that can be displayed on the GameBoard should implement this interface.
  */
 public interface Sprites {
 
@@ -28,7 +29,19 @@ public interface Sprites {
      */
     boolean intersects(Sprites s);
 
+    /**
+     * Helper Method that we get the isRemoved flag.
+     * This flag need to be raised for the {@link Domain.Game.GameModels#updateGameState(long) updateGamestate} to garbageCollect that Sprite.
+     * <br>
+     * <font color = RED>NOTE</font> That removing a Sprite directly from the {@link Domain.Board.BoardModels BoardModel} will most
+     * likely result in a concurrentModificationException.
+     * @return True if Sprite was removed.
+     */
     boolean isRemoved();
 
+    /**
+     * Helper method to set the is Removed Flag.
+     * @param newStatus True or False
+     */
     void setIsRemoved(boolean newStatus);
 }
