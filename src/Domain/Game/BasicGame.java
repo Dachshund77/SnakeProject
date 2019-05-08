@@ -12,24 +12,32 @@ import java.util.ArrayList;
 
 /**
  * Actual implementation of the GameModels interface.
- * This method keep track of score and if the game is over.
+ * This class keep track of score.
  */
 public class BasicGame extends GameModel { //TODO this class might also be in charge of playing sounds?
 
     private IntegerProperty score = new SimpleIntegerProperty(this,"Score",0);
 
     public BasicGame(BoardModels boardModel) {
-        this.boardModel = boardModel; //TODO here we need to make new
+        this.boardModel = boardModel;
         this.score.set(0);
         spawnNextFood();
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public IntegerProperty scoreProperty() {
         return score;
     }
 
 
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * This implementation will always keep one {@link Food} on the Board.
+     */
     @Override
     public void spawnNextFood() {
         if (boardModel.getFoods().size() < 1) {
