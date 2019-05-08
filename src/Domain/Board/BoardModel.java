@@ -16,16 +16,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-
+/**
+ * Abstract class with the most common implementation for all Boards.
+ */
 public abstract class BoardModel implements BoardModels { //TODO could have better control to prevent pollution
 
     private double height;
     private double width;
     private double wallThickness = 1;
 
-    private ArrayList<Sprites> sprites; //RAISE A DELETE
+    private ArrayList<Sprites> sprites;
     private ArrayList<PlayerEntities> playerEntities;
-    private ArrayList<Foods> foods; //TODO should be split at some point into moveable food and timeable food
+    private ArrayList<Foods> foods;
 
     public BoardModel(double height, double width) {
         this.height = height;
@@ -40,6 +42,7 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         Wall leftWall = new Wall(0,0,height,wallThickness,Color.BLACK);
         Wall rightWall = new Wall(width-wallThickness,0,height,wallThickness,Color.BLACK);
 
+        //Adding boundary walls
         addSprite(topWall);
         addSprite(bottomWall);
         addSprite(leftWall);
@@ -61,6 +64,11 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return foods;
     }
 
+    /**
+     *{@inheritDoc}
+     * <br><br>
+     * This implementation will make sure that the Sprites reference is also removed from {@link #playerEntities} and {@link #foods}.
+     */
     @Override
     public boolean removeSprite(Sprites s) {
         if (s instanceof PlayerEntities){
@@ -72,6 +80,11 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
         return sprites.remove(s);
     }
 
+    /**
+     *{@inheritDoc}
+     * <br><br>
+     * This implementation will make sure that the Sprites reference is also added to {@link #playerEntities} and {@link #foods}.
+     */
     @Override
     public boolean addSprite(Sprites s) {
         if (s instanceof PlayerEntities){

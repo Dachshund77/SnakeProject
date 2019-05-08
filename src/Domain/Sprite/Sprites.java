@@ -40,7 +40,9 @@ public interface Sprites {
     boolean isRemoved();
 
     /**
-     * Helper method to set the isRemoved Flag.
+     * Helper method to set the isRemoved Flag. This method (or field inside a Sprite) must be used so that
+     * {@link Domain.Game.GameModels#updateGameState(long) the game loop} can properly garbage collect this Sprite.
+     * Failing to do so will most likely result in a ConcurrentModificationException.
      * @param newStatus True or False
      */
     void setIsRemoved(boolean newStatus);
