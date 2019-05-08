@@ -13,6 +13,7 @@ public interface Moveables extends Sprites{
      * repeatedly from the {@link GameModels#updateGameState(long) mainGameLoop}.
      * @param time Milliseconds passed since last move.
      * @param gameModels The gameModel calling this method.
+     * @see GameModels
      */
     void move(long time, GameModels gameModels);
 

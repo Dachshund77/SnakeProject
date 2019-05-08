@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 
 /**
  * Abstract class with shared implementation for all Movables.
+ * @see Moveables
  */
 public abstract class Moveable implements Moveables, Sprites {
 

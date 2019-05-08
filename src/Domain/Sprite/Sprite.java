@@ -4,6 +4,7 @@ import javafx.geometry.Rectangle2D;
 
 /**
  * Abstract class to hold common implementation for all Sprites.
+ * @see Sprites
  */
 public abstract class Sprite implements Sprites{
 

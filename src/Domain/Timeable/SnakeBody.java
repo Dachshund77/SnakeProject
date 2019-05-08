@@ -5,6 +5,10 @@ import Domain.Sprite.Sprites;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * Snakebody class that the 'Tail' of a snake consist of.
+ * @see Domain.PlayerEntity.SnakeHead
+ */
 public class SnakeBody extends Timeable { //TODO changes in velocity need to be considered to properly make the snake body collision
 
     private Color paint;
@@ -18,6 +22,7 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
 
     /**
      * {@inheritDoc}
+     * <br><br>
      * In this case it will draw an Oval.
      */
     @Override
@@ -28,7 +33,9 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
 
     /**
      * {@inheritDoc}
-     * This implementation will also return false if the collisionIgnoranceTime is bigger or equal that the current lifetime.
+     * <br><br>
+     * This implementation will also return false if the collisionIgnoranceTime is bigger than the current lifetime.
+     * Will briefly ignore collision after creation.
      * @return True if sprites overlapping, false if not or condition is not met.
      */
     @Override
@@ -40,10 +47,15 @@ public class SnakeBody extends Timeable { //TODO changes in velocity need to be 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * This implementation will remove this Snakebody if the currentLifeTime is bigger than MaxLifetime.
+     */
     @Override
-    public void update(long time, GameModels gameModels) {
-        super.update(time, gameModels);
-        if (collisionIgnoranceTime < 0){
+    public void update(long milSecPassed, GameModels gameModels) {
+        super.update(milSecPassed, gameModels);
+        if (collisionIgnoranceTime < 0){ //TODO just for testin, should be REMOVED
             paint = Color.GREEN;
         }
         if (currentLifetime > maxLifeTime){

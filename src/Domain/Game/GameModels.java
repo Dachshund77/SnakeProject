@@ -16,13 +16,14 @@ import javafx.beans.property.IntegerProperty;
  *         <li> This flag is set via {@link #detectGameEnd()}</li>
  *     </ul>
  *     <li>A ArrayList addQue accesible via {@link #addSpriteQue(Sprites)}</li>
+ *     <li>An implemntation of the {@link #updateGameState(long)} method</li>
  * </ul>
  */
 public interface GameModels {
 
     /**
-     * Method that updates the GameState and detect eventual important gameState like GameOver.
-     * Note that this method should move and update each entity according of their implementations.
+     * Method that updates the GameState and detect eventual important gameStates like GameOver.
+     * Note that this method should move and update each entity according to their implementations.
      * This method will be repeatedly called from the Controller class.
      * @param milSecPassed Milliseconds passed since last call.
      * @see Controller

@@ -18,6 +18,7 @@ import java.util.Random;
 
 /**
  * Abstract class with the most common implementation for all Boards.
+ * @see BoardModels
  */
 public abstract class BoardModel implements BoardModels { //TODO could have better control to prevent pollution
 

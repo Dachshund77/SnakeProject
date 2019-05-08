@@ -1,7 +1,6 @@
 package Domain.TimeMovable;
 
 import Domain.Game.GameModels;
-import Domain.Moveable.Moveable;
 import Domain.Moveable.Moveables;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeables;
@@ -41,8 +40,8 @@ public abstract class TimeMoveable implements Timeables, Moveables, Sprites {//T
     }
 
     @Override
-    public void update(long time, GameModels gameModels) {
-        currentLifetime += time;
+    public void update(long milSecPassed, GameModels gameModels) {
+        currentLifetime += milSecPassed;
     }
 
     public double getMaxLifeTime() {

@@ -1,10 +1,13 @@
 package Domain.Timeable;
 
 import Domain.Game.GameModels;
-import Domain.Sprite.Sprite;
 import Domain.Sprite.Sprites;
 import javafx.geometry.Rectangle2D;
 
+/**
+ * Abstract class with shared implementations for all Timeables.
+ * @see Timeables
+ */
 public abstract class Timeable implements Timeables, Sprites {
 
     // From interface Sprites
@@ -31,10 +34,10 @@ public abstract class Timeable implements Timeables, Sprites {
     }
 
     @Override
-    public void update(long time, GameModels gameModels) {
-        currentLifetime += time;
+    public void update(long milSecPassed, GameModels gameModels) {
+        currentLifetime += milSecPassed;
         if (collisionIgnoranceTime >= 0) {
-            collisionIgnoranceTime -= time;
+            collisionIgnoranceTime -= milSecPassed;
         }
     }
 
