@@ -12,4 +12,5 @@ public interface Timeables extends Sprites {
 
     double getMaxLifeTime();
 
+    void setMaxLifeTime(double newMaxLifeTime);
 }

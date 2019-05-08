@@ -58,6 +58,9 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
             detectCollision(moveables, sprites);
         }
 
+        //Spawn game element (foods)
+        spawnNextFood();
+
         //Detect game end
         detectGameEnd();
     }
@@ -74,15 +77,6 @@ public abstract class GameModel implements GameModels { //TODO need JavaDoc
                 moveable.handleCollision(sprite, this);
             }
         }
-    }
-
-    @Override
-    public void spawnNextFood() { //TODO should be pushed to actual implementation
-        double x = boardModel.getRandomX();
-        double y = boardModel.getRandomY();
-
-        Food food = new Food(x, y, 10, 10, Color.GREEN, 100, 500);
-        addSpriteQue(food);
     }
 
     @Override

@@ -52,9 +52,10 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
             double bodyLength = this.bodyLength;
             double noCollisionTime = ((newSnakeBodyWidth + snakeHeadWidth) / snakeHeadSpeed) + ((newSnakeBodyHeight + snakeHeadHeight) / snakeHeadSpeed);
 
-            SnakeBody body = new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, 10000);
+            SnakeBody body = new SnakeBody(tempxPosition, tempyPosition, newSnakeBodyHeight, newSnakeBodyWidth, Color.RED, bodyLength, noCollisionTime);
             gameModels.addSpriteQue(body);
             tail.add(body);
+            System.out.println("tail size: "+tail.size());
         }
 
         //Cleaning up the tail references
@@ -64,6 +65,7 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
             SnakeBody snakeBody = iterator.next();
             if (snakeBody.getCurrentLifetime() > snakeBody.getMaxLifeTime()) {
                 iterator.remove();
+                System.out.println("Removing from tail");
             } else {
                 break;
             }
@@ -110,10 +112,18 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     public void handleCollision(Sprites s, GameModels gameModels) {
         if (s instanceof Foods) {
             Foods f = (Foods) s;
-            bodyLength += f.getAddedLength();
+            double addedlegth = f.getAddedLength();
+            bodyLength += addedlegth;
+
             int curretScore = gameModels.scoreProperty().get();
             gameModels.scoreProperty().set((int) (curretScore + f.getScoreValue()));
+
+            for (SnakeBody snakeBody : tail) {
+                snakeBody.setMaxLifeTime(snakeBody.getMaxLifeTime()+addedlegth);
+            }
+
             f.setIsRemoved(true);
+
         } else {
             isRemoved = true;
         }

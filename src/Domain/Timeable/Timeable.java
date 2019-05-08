@@ -32,4 +32,8 @@ public abstract class Timeable extends Sprite implements Timeables {
         return currentLifetime;
     }
 
+    @Override
+    public void setMaxLifeTime(double newMaxLifeTime) {
+        maxLifeTime = newMaxLifeTime;
+    }
 }
