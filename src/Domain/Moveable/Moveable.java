@@ -1,7 +1,6 @@
 package Domain.Moveable;
 
 import Domain.Game.GameModels;
-import Domain.Sprite.Sprite;
 import Domain.Sprite.Sprites;
 import javafx.geometry.Rectangle2D;
 
