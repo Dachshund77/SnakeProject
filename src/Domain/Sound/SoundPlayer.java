@@ -21,6 +21,7 @@ public class SoundPlayer {
      * @param file The File to be played.
      */
     public static void playSoundEffect(File file){
+        System.out.println("SoundPlayer.playSoundEffect");
         Media media = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.volumeProperty().bind(soundEffectVolume);
@@ -33,6 +34,7 @@ public class SoundPlayer {
      * @param file The File to be played.
      */
     public static void playBackGroundMusic(File file){ //If there is ever a problem with suddenly stopping, use a MediaView
+        System.out.println("SoundPlayer.playBackGroundMusic");
         if (backGroundMusic != null){
             backGroundMusic.dispose();
         }

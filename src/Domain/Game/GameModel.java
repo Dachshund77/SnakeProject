@@ -2,18 +2,24 @@ package Domain.Game;
 
 import Domain.Board.BoardModels;
 import Domain.Moveable.Moveables;
+import Domain.Sound.SoundPlayer;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeables;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Abstract class that contains the common implementations for GameModels.
+ *
  * @see GameModels
  */
 public abstract class GameModel implements GameModels {
 
     /**
      * Field to store the BoardModels. The BoardModels are container to store all Sprites.
+     *
      * @see BoardModels
      */
     BoardModels boardModel;
@@ -35,14 +41,15 @@ public abstract class GameModel implements GameModels {
      * <br><br>
      * In order this method will:
      * <ul>
-     *     <li>{@link Timeables#update(long, GameModels) Update} all {@link Timeables}</li>
-     *     <li>{@link Moveables#move(long, GameModels) Move} all {@link Moveables}</li>
-     *     <li>Add the Sprites in the {@link #addQue}</li>
-     *     <li>Remove {@link Sprites} with the {@link Sprites#isRemoved() isRemoved} flag raised.</li>
-     *     <li>Detect Collision via {@link #detectCollision(Moveables, ArrayList)}</li>
-     *     <li>Spawn Food via {@link #spawnNextFood()}</li>
-     *     <li>Detect game end via {@link #detectGameEnd()}</li>
+     * <li>{@link Timeables#update(long, GameModels) Update} all {@link Timeables}</li>
+     * <li>{@link Moveables#move(long, GameModels) Move} all {@link Moveables}</li>
+     * <li>Add the Sprites in the {@link #addQue}</li>
+     * <li>Remove {@link Sprites} with the {@link Sprites#isRemoved() isRemoved} flag raised.</li>
+     * <li>Detect Collision via {@link #detectCollision(Moveables, ArrayList)}</li>
+     * <li>Spawn Food via {@link #spawnNextFood()}</li>
+     * <li>Detect game end via {@link #detectGameEnd()}</li>
      * </ul>
+     *
      * @param milSecPassed Milliseconds passed since last call.
      */
     @Override
@@ -104,8 +111,9 @@ public abstract class GameModel implements GameModels {
      * The detection is done with the help of {@link Sprites#intersects(Sprites)}.
      * This method will call the Movables {@link Moveables#handleCollision(Sprites, GameModels) handleCollision} method,
      * if a Collision is detected.
+     *
      * @param moveable The movables we want to detect a Collisions for.
-     * @param sprites A list of Sprites we want to check against our Movable.
+     * @param sprites  A list of Sprites we want to check against our Movable.
      */
     private void detectCollision(Moveables moveable, ArrayList<Sprites> sprites) {
         for (Sprites sprite : sprites) {
@@ -119,18 +127,30 @@ public abstract class GameModel implements GameModels {
      * {@inheritDoc}
      * <br><br>
      * This implementation will raise the {@link #gameOver} flag only if the are no Player Entities left on the Board.
+     * This implementation also disposed off the background music and start the game over sound effect.
+     *
      * @see BoardModels
      */
     @Override
     public void detectGameEnd() {
         if (boardModel.getMovablePlayerEntities().size() == 0) {
+            if (!gameOver) { //Makes that this will only be executed once
+
+                //Dispose of background music
+                SoundPlayer.disposeBackgroundMusic();
+
+                //Play game over sound effect
+                ClassLoader classLoader = getClass().getClassLoader();
+                File file = new File(Objects.requireNonNull(classLoader.getResource("SoundEffects/GameOver.wav")).getFile());
+                SoundPlayer.playSoundEffect(file);
+            }
             gameOver = true;
         }
     }
 
     /**
-     *
      * {@inheritDoc}
+     *
      * @return The value of {@link #gameOver} field.
      */
     @Override
@@ -140,11 +160,12 @@ public abstract class GameModel implements GameModels {
 
     /**
      * {@inheritDoc}
-     * @see  #addQue
+     *
+     * @see #addQue
      */
     @Override
     public boolean addSpriteQue(Sprites s) {
-         return addQue.add(s);
+        return addQue.add(s);
     }
 
 }
