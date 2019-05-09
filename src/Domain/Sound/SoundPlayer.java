@@ -1,4 +1,4 @@
-package Sound;
+package Domain.Sound;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.media.Media;
@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * Simple MediaPlayer That can plat Background music (indefinitely) or once a soundEffect.
  */
-public class SoundEffectPlayer {
+public class SoundPlayer {
 
     private static MediaPlayer backGroundMusic;
 
@@ -25,6 +25,7 @@ public class SoundEffectPlayer {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.volumeProperty().bind(soundEffectVolume);
         mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose); //Might need a kill all or something
+        mediaPlayer.play();
     }
 
     /**
@@ -32,6 +33,7 @@ public class SoundEffectPlayer {
      * @param file The File to be played.
      */
     public static void playBackGroundMusic(File file){ //If there is ever a problem with suddenly stopping, use a MediaView
+        System.out.println("SoundPlayer.playBackGroundMusic");
         if (backGroundMusic != null){
             backGroundMusic.dispose();
         }
@@ -39,6 +41,7 @@ public class SoundEffectPlayer {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.volumeProperty().bind(backgroundMusicVolume);
+        mediaPlayer.play();
 
         backGroundMusic = mediaPlayer;
     }

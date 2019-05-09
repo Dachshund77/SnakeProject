@@ -3,11 +3,13 @@ package Domain.Game;
 import Domain.Board.BoardModels;
 import Domain.Food.Food;
 import Domain.PlayerEntity.SnakeHead;
+import Domain.Sound.SoundPlayer;
 import Domain.Sprite.Sprites;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +24,11 @@ public class BasicGame extends GameModel { //TODO this class might also be in ch
         this.boardModel = boardModel;
         this.score.set(0);
         spawnNextFood();
+
+        //TODO test, need refactoring
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("TechnoBackground.mp3").getFile());
+        SoundPlayer.playBackGroundMusic(file);
     }
 
     public IntegerProperty scoreProperty() {
