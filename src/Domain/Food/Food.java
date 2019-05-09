@@ -1,9 +1,11 @@
 package Domain.Food;
 
-import Domain.Sprite.Sprite;
-import Domain.Sprite.Sprites;
+import Domain.Sound.SoundPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.io.File;
+import java.util.Objects;
 
 /**
  * Actual implementation of a simple food object.
@@ -12,13 +14,13 @@ public class Food extends SimpleFoods {  //TODO the circle could become a image 
 
     private Color paint;
     private double scoreValue;
-    private double addedlength;
+    private double addedLength;
 
-    public Food(double xPosition, double yPosition, double height, double width, Color paint, double scoreValue, double addedlength) {
+    public Food(double xPosition, double yPosition, double height, double width, Color paint, double scoreValue, double addedLength) {
         super(xPosition, yPosition, height, width);
         this.paint = paint;
         this.scoreValue = scoreValue;
-        this.addedlength = addedlength;
+        this.addedLength = addedLength;
     }
 
     /**
@@ -39,6 +41,21 @@ public class Food extends SimpleFoods {  //TODO the circle could become a image 
 
     @Override
     public double getAddedLength() {
-        return addedlength;
+        return addedLength;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <br><br>
+     * This implementation will also play a soundEffect of eating sounds.
+     */
+    @Override
+    public void setIsRemoved(boolean newStatus) {
+        if (!isRemoved){ //Insurance so this will only be executed once
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(Objects.requireNonNull(classLoader.getResource("SoundEffects/Eating.wav")).getFile());
+            SoundPlayer.playSoundEffect(file);
+        }
+        super.setIsRemoved(newStatus);
     }
 }
