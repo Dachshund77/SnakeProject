@@ -1,13 +1,14 @@
 package Domain.Food;
 
 import Domain.Sprite.Sprite;
+import Domain.Sprite.Sprites;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
  * Actual implementation of a simple food object.
  */
-public class Food extends Sprite implements Foods{  //TODO the circle could become a image or something
+public class Food extends SimpleFoods {  //TODO the circle could become a image or something
 
     private Color paint;
     private double scoreValue;
