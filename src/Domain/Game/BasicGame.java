@@ -15,7 +15,7 @@ import java.util.Objects;
 
 /**
  * Actual implementation of the GameModels interface.
- * This class keep track of score. And places a single snakeHead in the middle
+ * This class keep track of score. And places a single snakeHead in the middle.
  */
 public class BasicGame extends GameModel { //TODO this class might also be in charge of playing sounds?
 
@@ -36,7 +36,7 @@ public class BasicGame extends GameModel { //TODO this class might also be in ch
         //Starting background music
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(Objects.requireNonNull(classLoader.getResource("BackgroundMusic/TechnoBackground.mp3")).getFile());
-        SoundPlayer.playBackGroundMusic(file);
+        SoundPlayer.getInstance().playBackGroundMusic(file);
     }
 
     public IntegerProperty scoreProperty() {

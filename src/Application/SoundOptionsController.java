@@ -20,8 +20,10 @@ public class SoundOptionsController {
 
     public void initialize(){
         //Get needed values
-        SimpleDoubleProperty backgroundVolumeProperty = SoundPlayer.backgroundMusicVolumeProperty();
-        SimpleDoubleProperty soundEffectVolumeProperty = SoundPlayer.soundEffectVolumeProperty();
+        SoundPlayer soundPlayer = SoundPlayer.getInstance();
+
+        SimpleDoubleProperty backgroundVolumeProperty = soundPlayer.backgroundMusicVolumeProperty();
+        SimpleDoubleProperty soundEffectVolumeProperty = soundPlayer.soundEffectVolumeProperty();
 
         double backgroundVolume = backgroundVolumeProperty.doubleValue();
         double soundEffectVolume = soundEffectVolumeProperty.doubleValue();

@@ -54,7 +54,7 @@ public class Food extends SimpleFoods {  //TODO the circle could become a image 
         if (!isRemoved){ //Insurance so this will only be executed once
             ClassLoader classLoader = getClass().getClassLoader();
             File file = new File(Objects.requireNonNull(classLoader.getResource("SoundEffects/Eating.wav")).getFile());
-            SoundPlayer.playSoundEffect(file);
+            SoundPlayer.getInstance().playSoundEffect(file);
         }
         super.setIsRemoved(newStatus);
     }

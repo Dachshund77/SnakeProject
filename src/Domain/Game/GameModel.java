@@ -137,12 +137,12 @@ public abstract class GameModel implements GameModels {
             if (!gameOver) { //Makes that this will only be executed once
 
                 //Dispose of background music
-                SoundPlayer.disposeBackgroundMusic();
+                SoundPlayer.getInstance().disposeBackgroundMusic();
 
                 //Play game over sound effect
                 ClassLoader classLoader = getClass().getClassLoader();
                 File file = new File(Objects.requireNonNull(classLoader.getResource("SoundEffects/GameOver.wav")).getFile());
-                SoundPlayer.playSoundEffect(file);
+                SoundPlayer.getInstance().playSoundEffect(file);
             }
             gameOver = true;
         }

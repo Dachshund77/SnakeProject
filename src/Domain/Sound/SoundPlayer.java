@@ -8,21 +8,31 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Simple MediaPlayer That can plat Background music (indefinitely) or once a soundEffect.
+ * Simple Singelton of a MediaPlayer that can plat Background music (indefinitely) or once a soundEffect.
  */
 public class SoundPlayer {
 
-    private static MediaPlayer backGroundMusic;
-    private static ArrayList<MediaPlayer> soundEffects = new ArrayList<>();
+    private static SoundPlayer ourInstance = new SoundPlayer();
 
-    private static SimpleDoubleProperty soundEffectVolume = new SimpleDoubleProperty(1);
-    private static SimpleDoubleProperty backgroundMusicVolume = new SimpleDoubleProperty(1);
+    public static SoundPlayer getInstance() {
+        return ourInstance;
+    }
+
+    private SoundPlayer() {
+        //Here we should load prefs
+    }
+
+    private MediaPlayer backGroundMusic;
+    private ArrayList<MediaPlayer> soundEffects = new ArrayList<>();
+
+    private SimpleDoubleProperty soundEffectVolume = new SimpleDoubleProperty(1);
+    private SimpleDoubleProperty backgroundMusicVolume = new SimpleDoubleProperty(1);
 
     /**
      * Plays a MediaFile once.
      * @param file The File to be played.
      */
-    public static void playSoundEffect(File file){
+    public void playSoundEffect(File file){
         Media media = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         soundEffects.add(mediaPlayer); //Need to keep a reference so it does not becomes garbage collected.
@@ -39,7 +49,7 @@ public class SoundPlayer {
      * Plays a MediaFile as background music.
      * @param file The File to be played.
      */
-    public static void playBackGroundMusic(File file){ //If there is ever a problem with suddenly stopping, use a MediaView
+    public void playBackGroundMusic(File file){ //If there is ever a problem with suddenly stopping, use a MediaView
         if (backGroundMusic != null){
             backGroundMusic.dispose();
         }
@@ -55,7 +65,7 @@ public class SoundPlayer {
     /**
      * Stops the backgroundMedia Player. This will make the music stop.
      */
-    public static void disposeBackgroundMusic(){
+    public void disposeBackgroundMusic(){
         if (backGroundMusic != null){
             backGroundMusic.stop();
             backGroundMusic = null;
@@ -68,7 +78,7 @@ public class SoundPlayer {
      * Removes a specific sound effect and stops it.
      * @param mediaPlayer MediaPlayer object to be removed.
      */
-    public static void disposeSoundEffect(MediaPlayer mediaPlayer){
+    public void disposeSoundEffect(MediaPlayer mediaPlayer){
         soundEffects.remove(mediaPlayer);
         mediaPlayer.stop();
         //mediaPlayer.dispose(); // Creates performance issue
@@ -77,7 +87,7 @@ public class SoundPlayer {
     /**
      * Removes all soundEffects and disposes them. Effectively stopping all Sound effect.
      */
-    public static void disposeAllSoundeffects(){
+    public void disposeAllSoundeffects(){
         //Creates formance issue
         for (MediaPlayer soundEffect : soundEffects) {
             //soundEffect.dispose();
@@ -86,19 +96,22 @@ public class SoundPlayer {
         soundEffects.clear();
     }
 
-    public static double getSoundEffectVolume() {
+    public double getSoundEffectVolume() {
         return soundEffectVolume.get();
     }
 
-    public static SimpleDoubleProperty soundEffectVolumeProperty() {
+    public SimpleDoubleProperty soundEffectVolumeProperty() {
         return soundEffectVolume;
     }
 
-    public static double getBackgroundMusicVolume() {
+    public double getBackgroundMusicVolume() {
         return backgroundMusicVolume.get();
     }
 
-    public static SimpleDoubleProperty backgroundMusicVolumeProperty() {
+    public SimpleDoubleProperty backgroundMusicVolumeProperty() {
         return backgroundMusicVolume;
     }
+
+
+    //TODO WHERE TO SAVE
 }
