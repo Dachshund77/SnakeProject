@@ -63,4 +63,23 @@ public class SoundPlayer {
         }
         backGroundMusic = null;
     }
+
+    /**
+     * Removes a specific sound effect and disposes it.
+     * @param mediaPlayer MediaPlayer object to be removed.
+     */
+    public static void disposeSoundEffect(MediaPlayer mediaPlayer){
+        soundEffects.remove(mediaPlayer);
+        mediaPlayer.dispose();
+    }
+
+    /**
+     * Removes all soundEffects and disposes them. Effectively stopping all Sound effect.
+     */
+    public static void disposeAllSoundeffects(){
+        for (MediaPlayer soundEffect : soundEffects) {
+            soundEffect.dispose();
+        }
+        soundEffects.clear();
+    }
 }
