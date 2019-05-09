@@ -139,18 +139,18 @@ public class SnakeHead extends MoveablePlayerEntity { //TODO the circle could be
     @Override
     public void handleCollision(Sprites s, GameModels gameModels) {
         if (s instanceof Foods) {
-            Foods f = (Foods) s;
-            double addedlegth = f.getAddedLength();
+            Foods food = (Foods) s;
+            double addedlegth = food.getAddedLength();
             bodyLength += addedlegth;
 
             int curretScore = gameModels.scoreProperty().get();
-            gameModels.scoreProperty().set((int) (curretScore + f.getScoreValue()));
+            gameModels.scoreProperty().set((int) (curretScore + food.getScoreValue()));
 
             for (SnakeBody snakeBody : tail) {
                 snakeBody.setMaxLifeTime(snakeBody.getMaxLifeTime()+addedlegth);
             }
 
-            f.setIsRemoved(true);
+            food.setIsRemoved(true);
 
         } else {
             isRemoved = true;
