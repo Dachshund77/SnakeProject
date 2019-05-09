@@ -6,6 +6,7 @@ import Domain.Game.GameModels;
 import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
+import UI.SoundOptions;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,16 +15,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Main Controller for the Snake game. Note that the controller is just the top level and any game or board logic is done by the models.
+ * Main MainController for the Snake game. Note that the controller is just the top level and any game or board logic is done by the models.
  *
  * @see GameModels
  * @see Domain.Board.BoardModels
  */
-public class Controller {
+public class MainController {
 
     @FXML
     public Canvas backGroundCanvas;
@@ -102,5 +105,11 @@ public class Controller {
             p.handleUserInput(keyCode);
         }
 
+    }
+
+    @FXML
+    public void handleSoundOption(ActionEvent actionEvent) throws IOException {
+        SoundOptions soundOptions = new SoundOptions();
+        soundOptions.start(new Stage());
     }
 }

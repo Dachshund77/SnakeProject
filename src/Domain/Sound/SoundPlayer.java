@@ -85,4 +85,20 @@ public class SoundPlayer {
         }
         soundEffects.clear();
     }
+
+    public static double getSoundEffectVolume() {
+        return soundEffectVolume.get();
+    }
+
+    public static SimpleDoubleProperty soundEffectVolumeProperty() {
+        return soundEffectVolume;
+    }
+
+    public static double getBackgroundMusicVolume() {
+        return backgroundMusicVolume.get();
+    }
+
+    public static SimpleDoubleProperty backgroundMusicVolumeProperty() {
+        return backgroundMusicVolume;
+    }
 }

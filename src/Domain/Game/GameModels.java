@@ -1,6 +1,6 @@
 package Domain.Game;
 
-import Application.Controller;
+import Application.MainController;
 import Domain.Board.BoardModels;
 import Domain.Sprite.Sprites;
 import javafx.beans.property.IntegerProperty;
@@ -24,9 +24,9 @@ public interface GameModels {
     /**
      * Method that updates the GameState and detect eventual important gameStates like GameOver.
      * Note that this method should move and update each entity according to their implementations.
-     * This method will be repeatedly called from the Controller class.
+     * This method will be repeatedly called from the MainController class.
      * @param milSecPassed Milliseconds passed since last call.
-     * @see Controller
+     * @see MainController
      */
     void updateGameState(long milSecPassed);
 

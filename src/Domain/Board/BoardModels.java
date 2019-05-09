@@ -1,14 +1,9 @@
 package Domain.Board;
 
+import Application.MainController;
 import Domain.Food.Foods;
-import Domain.Moveable.Moveable;
-import Domain.Moveable.Moveables;
-import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
-import Domain.TimeMovable.TimeMoveable;
-import Domain.Timeable.Timeable;
-import Domain.Timeable.Timeables;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -35,7 +30,7 @@ public interface BoardModels {
      * As {@link PlayerEntities#handleUserInput(KeyCode) userInput} will need to be handled repeatedly, having
      * the player entities stored separably will ease performance on the game.
      * @return List of All PlayerEntities
-     * @see Application.Controller
+     * @see MainController
      */
     ArrayList<PlayerEntities> getMovablePlayerEntities();
 
