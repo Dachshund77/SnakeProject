@@ -19,7 +19,7 @@ public class SoundPlayer {
     private static SimpleDoubleProperty backgroundMusicVolume = new SimpleDoubleProperty(1);
 
     /**
-     * Plays a MediaFile once. Disposed the MediaPlayer after one Cycle.
+     * Plays a MediaFile once.
      * @param file The File to be played.
      */
     public static void playSoundEffect(File file){
@@ -28,7 +28,7 @@ public class SoundPlayer {
         soundEffects.add(mediaPlayer); //Need to keep a reference so it does not becomes garbage collected.
         mediaPlayer.volumeProperty().bind(soundEffectVolume);
         mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.dispose();
+            //mediaPlayer.dispose(); //This creates issue with performance
             soundEffects.remove(mediaPlayer);
         });
 
@@ -53,30 +53,35 @@ public class SoundPlayer {
     }
 
     /**
-     * Disposed the backgroundMedia Player. This will make the music stop.
+     * Stops the backgroundMedia Player. This will make the music stop.
      */
     public static void disposeBackgroundMusic(){
         if (backGroundMusic != null){
-            backGroundMusic.dispose();
+            backGroundMusic.stop();
+            backGroundMusic = null;
+            //backGroundMusic.dispose(); //Creates performance issue
         }
-        backGroundMusic = null;
+
     }
 
     /**
-     * Removes a specific sound effect and disposes it.
+     * Removes a specific sound effect and stops it.
      * @param mediaPlayer MediaPlayer object to be removed.
      */
     public static void disposeSoundEffect(MediaPlayer mediaPlayer){
         soundEffects.remove(mediaPlayer);
-        mediaPlayer.dispose();
+        mediaPlayer.stop();
+        //mediaPlayer.dispose(); // Creates performance issue
     }
 
     /**
      * Removes all soundEffects and disposes them. Effectively stopping all Sound effect.
      */
     public static void disposeAllSoundeffects(){
+        //Creates formance issue
         for (MediaPlayer soundEffect : soundEffects) {
-            soundEffect.dispose();
+            //soundEffect.dispose();
+            soundEffect.stop();
         }
         soundEffects.clear();
     }
