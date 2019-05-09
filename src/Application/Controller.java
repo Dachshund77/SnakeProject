@@ -1,6 +1,6 @@
 package Application;
 
-import Domain.Board.BasicBoard;
+import Domain.Board.BlankBoard;
 import Domain.Game.BasicGame;
 import Domain.Game.GameModels;
 import Domain.PlayerEntity.MoveablePlayerEntity;
@@ -44,7 +44,7 @@ public class Controller {
      * @param event the event that starts this method.
      */
     public void handleNewGame(ActionEvent event) {
-        gameModel = new BasicGame(new BasicBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
+        gameModel = new BasicGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
         startGameLoop();
     }

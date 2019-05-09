@@ -33,7 +33,6 @@ public class SoundPlayer {
      * @param file The File to be played.
      */
     public static void playBackGroundMusic(File file){ //If there is ever a problem with suddenly stopping, use a MediaView
-        System.out.println("SoundPlayer.playBackGroundMusic");
         if (backGroundMusic != null){
             backGroundMusic.dispose();
         }

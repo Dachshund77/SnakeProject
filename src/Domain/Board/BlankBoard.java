@@ -19,19 +19,12 @@ import java.util.Iterator;
 
 /**
  * Actual implementation of the Board state.
- * This will add a single snakeHead to the game.
  */
-public class BasicBoard extends BoardModel {
+public class BlankBoard extends BoardModel {
 
 
-    public BasicBoard(double height, double width) {
+    public BlankBoard(double height, double width) {
         super(height, width);
-
-        SnakeHead snakeHead = new SnakeHead(width / 2, height / 2, 10, 10, "Player 1", Color.RED, 0.1,
-                new SnakeControl(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT),1000);
-
-        addSprite(snakeHead);
-
     }
 }
 
