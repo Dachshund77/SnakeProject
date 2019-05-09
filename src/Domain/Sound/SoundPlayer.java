@@ -5,6 +5,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Simple MediaPlayer That can plat Background music (indefinitely) or once a soundEffect.
@@ -12,6 +13,7 @@ import java.io.File;
 public class SoundPlayer {
 
     private static MediaPlayer backGroundMusic;
+    private static ArrayList<MediaPlayer> soundEffects = new ArrayList<>();
 
     private static SimpleDoubleProperty soundEffectVolume = new SimpleDoubleProperty(1);
     private static SimpleDoubleProperty backgroundMusicVolume = new SimpleDoubleProperty(1);
@@ -24,8 +26,13 @@ public class SoundPlayer {
         System.out.println("SoundPlayer.playSoundEffect");
         Media media = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
+        soundEffects.add(mediaPlayer); //Need to keep a reference so it does not becomes garbage collected.
         mediaPlayer.volumeProperty().bind(soundEffectVolume);
-        mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose); //Might need a kill all or something
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.dispose();
+            soundEffects.remove(mediaPlayer);
+        });
+
         mediaPlayer.play();
     }
 
