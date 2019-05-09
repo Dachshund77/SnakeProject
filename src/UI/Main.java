@@ -1,10 +1,13 @@
 package UI;
 
+import Domain.Sound.SoundPlayer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -16,6 +19,14 @@ public class Main extends Application {
         primaryStage.setScene(Scene);
         primaryStage.show();
         Scene.getRoot().requestFocus();
+
+        //If the main Stage is closing then we want to save preferences
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                SoundPlayer.getInstance().savePreferences();
+            }
+        });
     }
 
 

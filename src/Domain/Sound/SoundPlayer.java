@@ -6,6 +6,7 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 /**
  * Simple Singelton of a MediaPlayer that can plat Background music (indefinitely) or once a soundEffect.
@@ -18,15 +19,17 @@ public class SoundPlayer {
         return ourInstance;
     }
 
-    private SoundPlayer() {
-        //Here we should load prefs
-    }
-
     private MediaPlayer backGroundMusic;
     private ArrayList<MediaPlayer> soundEffects = new ArrayList<>();
 
-    private SimpleDoubleProperty soundEffectVolume = new SimpleDoubleProperty(1);
-    private SimpleDoubleProperty backgroundMusicVolume = new SimpleDoubleProperty(1);
+    private SimpleDoubleProperty soundEffectVolume;
+    private SimpleDoubleProperty backgroundMusicVolume;
+
+    private SoundPlayer() {
+        Preferences preferences = Preferences.userNodeForPackage(SoundPlayer.class);
+        soundEffectVolume = new SimpleDoubleProperty(preferences.getDouble("soundEffectVolume",1.));
+        backgroundMusicVolume = new SimpleDoubleProperty(preferences.getDouble("backgroundMusicVolume",1.));
+    }
 
     /**
      * Plays a MediaFile once.
@@ -112,6 +115,14 @@ public class SoundPlayer {
         return backgroundMusicVolume;
     }
 
-
-    //TODO WHERE TO SAVE
+    /**
+     * Saves preferences for this class.
+     * This method will save the volume settings.
+     * @see UI.Main
+     */
+    public void savePreferences(){
+        Preferences preferences = Preferences.userNodeForPackage(SoundPlayer.class);
+        preferences.putDouble("soundEffectVolume", soundEffectVolume.getValue());
+        preferences.putDouble("backgroundMusicVolume",backgroundMusicVolume.getValue());
+    }
 }

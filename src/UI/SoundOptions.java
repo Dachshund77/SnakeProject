@@ -10,11 +10,6 @@ import java.io.IOException;
 
 public class SoundOptions extends Application { //TODO kill on main window close
 
-    /*
-    public static void main(String[] args) {
-        launch(args);
-    }
-*/
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SoundOptions.fxml"));
