@@ -24,7 +24,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="New">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="Basic Game" />
+              <MenuItem mnemonicParsing="false" onAction="#handleNewStandardGame" text="Basic Game" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleNewInsaneGame" text="Insane Game" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Options">

@@ -3,6 +3,7 @@ package Application;
 import Domain.Board.BlankBoard;
 import Domain.Game.BasicGame;
 import Domain.Game.GameModels;
+import Domain.Game.InsaneGame;
 import Domain.PlayerEntity.MoveablePlayerEntity;
 import Domain.PlayerEntity.PlayerEntities;
 import Domain.Sprite.Sprites;
@@ -55,8 +56,20 @@ public class MainController {
      *
      * @param event the event that starts this method.
      */
-    public void handleNewGame(ActionEvent event) {
+    public void handleNewStandardGame(ActionEvent event) {
         gameModel = new BasicGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
+        scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
+        startGameLoop();
+    }
+
+    /**
+     * Method to start and attach a new gameModels and BoardModels to to the Scene.
+     *
+     * @param event the event that starts this method.
+     */
+    @FXML
+    public void handleNewInsaneGame(ActionEvent event) {
+        gameModel = new InsaneGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
         startGameLoop();
     }
@@ -141,4 +154,6 @@ public class MainController {
         SoundOptions soundOptions = new SoundOptions();
         soundOptions.start(new Stage());
     }
+
+
 }
