@@ -74,4 +74,11 @@ public interface GameModels {
      */
     boolean addSpriteQue(Sprites s);
 
+    /**
+     * Method that initializes the gameLoop and runs it. Most notably this method will call {@link GameModels#updateGameState(long)}.
+     * This method will be in charge of drawing the actual Sprites on the canvas.
+     *
+     * @see Sprites
+     */
+    void startGameLoop();
 }

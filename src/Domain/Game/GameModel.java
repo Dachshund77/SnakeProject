@@ -5,6 +5,9 @@ import Domain.Moveable.Moveables;
 import Domain.Sound.SoundPlayer;
 import Domain.Sprite.Sprites;
 import Domain.Timeable.Timeables;
+import javafx.animation.AnimationTimer;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +38,44 @@ public abstract class GameModel implements GameModels {
      * Any sprites that should be added to the Board should be done via {@link #addSpriteQue(Sprites)}.
      */
     private ArrayList<Sprites> addQue = new ArrayList<>();
+
+    private long lastNanoTime = System.nanoTime();
+    private Canvas gameCanvas;
+
+    public GameModel(BoardModels boardModel, Canvas gameCanvas) {
+        this.boardModel = boardModel;
+        this.gameCanvas = gameCanvas;
+    }
+
+    @Override
+    public void startGameLoop() {
+        new AnimationTimer() {
+            @Override
+            public void handle(long currentNanoTime) {
+                // ask if the game has ended
+                if (isGameOver()) {
+                    stop();
+                }
+
+                // set needed value to keep track of time passed
+                long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
+                lastNanoTime = currentNanoTime;
+
+                //Update game, here the game logic will advance
+                updateGameState(timePassedInMilliseconds);
+
+                //Clear the canvas of everything
+                GraphicsContext gameCanvasGC = gameCanvas.getGraphicsContext2D();
+                gameCanvasGC.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight()); //Whole canvas
+
+                // Draw sprites
+                ArrayList<Sprites> sprites = getBoardModel().getSprites();
+                for (Sprites sprite : sprites) {
+                    sprite.render(gameCanvasGC);
+                }
+            }
+        }.start();
+    }
 
     /**
      * {@inheritDoc}
@@ -167,5 +208,6 @@ public abstract class GameModel implements GameModels {
     public boolean addSpriteQue(Sprites s) {
         return addQue.add(s);
     }
+
 
 }

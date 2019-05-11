@@ -7,6 +7,7 @@ import Domain.PlayerEntity.SnakeHead;
 import Domain.Sound.SoundPlayer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
@@ -21,9 +22,8 @@ public class InsaneGame extends GameModel { //TODO check entire javaDocs for thi
 
     private IntegerProperty score = new SimpleIntegerProperty(this,"Score",0);
 
-    public InsaneGame(BoardModels boardModel) {
-        this.boardModel = boardModel;
-        this.score.set(0);
+    public InsaneGame(BoardModels boardModel, Canvas gameCanvas) {
+        super(boardModel, gameCanvas);
         //Places the first food
         spawnNextFood();
 

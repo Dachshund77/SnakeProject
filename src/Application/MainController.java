@@ -45,86 +45,32 @@ public class MainController {
 
     private GameModels gameModel; // Game Logic that contains the logic interaction
 
-    private long lastNanoTime = System.nanoTime(); //Needed to calculate the time since last update
-
     public void initialize() {
 
     }
 
     /**
      * Method to start and attach a new gameModels and BoardModels to to the Scene.
-     *
+     * Will start the gameModels {@link GameModels#startGameLoop()}
      * @param event the event that starts this method.
      */
     public void handleNewStandardGame(ActionEvent event) {
-        gameModel = new BasicGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
+        gameModel = new BasicGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()),gameCanvas);
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
-        startGameLoop();
+        gameModel.startGameLoop();
     }
 
     /**
      * Method to start and attach a new gameModels and BoardModels to to the Scene.
-     *
+     * Will start the gameModels {@link GameModels#startGameLoop()}
      * @param event the event that starts this method.
      */
     @FXML
     public void handleNewInsaneGame(ActionEvent event) {
-        gameModel = new InsaneGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()));
+        gameModel = new InsaneGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()),gameCanvas);
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
-        startGameLoop();
+        gameModel.startGameLoop();
     }
-
-    /**
-     * Method that initializes the gameLoop and runs it. Most notably this method will call {@link GameModels#updateGameState(long)}.
-     * This method will be in charge of drawing the actual Sprites on the canvas.
-     *
-     * @see Sprites
-     */
-    private void startGameLoop() {
-        //TODO it would be pretty cool if the game would pause if we ever click on something that is not the game area
-        //mainBorderPane.getCenter().focusedProperty().addListener();
-/*
-        Parent parent = backGroundCanvas.getScene().getRoot();
-        parent.getScene().getWindow().focusedProperty();
-        parent.getScene().getWindow().focusedProperty().addListener(
-                (prop, oldNode, newNode) -> {
-                    System.out.println("prop = " + prop);
-                    System.out.println("oldNode = " + oldNode);
-                    System.out.println("newNode = " + newNode);
-                    System.out.println(parent.getScene().getFocusOwner());
-                    System.out.println(parent.getScene().focusOwnerProperty().toString());
-                    System.out.println(parent.getScene().getWindow().focusedProperty().get());
-                    System.out.println("----------------");
-                });
-*/
-        new AnimationTimer() {
-            @Override
-            public void handle(long currentNanoTime) {
-                // ask if the game has ended
-                if (gameModel.isGameOver()) {
-                    stop();
-                }
-
-                // set needed value to keep track of time passed
-                long timePassedInMilliseconds = ((currentNanoTime - lastNanoTime) / 1000000);
-                lastNanoTime = currentNanoTime;
-
-                //Update game, here the game logic will advance
-                gameModel.updateGameState(timePassedInMilliseconds);
-
-                //Clear the canvas of everything
-                GraphicsContext gameCanvasGC = gameCanvas.getGraphicsContext2D();
-                gameCanvasGC.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight()); //Whole canvas
-
-                // Draw sprites
-                ArrayList<Sprites> sprites = gameModel.getBoardModel().getSprites();
-                for (Sprites sprite : sprites) {
-                    sprite.render(gameCanvasGC); //TODO need a scale for model to canvas scaling... mb
-                }
-            }
-        }.start();
-    }
-
 
     /**
      * Method that will register and notify the playerEntities.
