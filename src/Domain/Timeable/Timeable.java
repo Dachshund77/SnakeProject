@@ -73,4 +73,14 @@ public abstract class Timeable implements Timeables, Sprites {
     public void setIsRemoved(boolean newStatus) {
         isRemoved = newStatus;
     }
+
+    @Override
+    public void setxPosition(double xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    @Override
+    public void setyPosition(double yPosition) {
+        this.yPosition = yPosition;
+    }
 }

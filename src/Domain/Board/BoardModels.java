@@ -63,6 +63,13 @@ public interface BoardModels {
     boolean addSprite(Sprites s);
 
     /**
+     * Method that tests a Sprites if it is colliding. This method does not require the Sprites s to be placed the board with {@link #addSprite(Sprites)};
+     * @param s Sprites that we want to test
+     * @return True, if there is any colliding Sprites
+     */
+    boolean isColliding(Sprites s);
+
+    /**
      * Helper method that will get this Board height.
      * @return Height of this board
      */

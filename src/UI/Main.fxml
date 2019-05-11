@@ -38,9 +38,9 @@
    <center>
       <StackPane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="backGroundCanvas" height="500.0" onKeyPressed="#handleUserInput" width="500.0" />
-            <Canvas fx:id="gameCanvas" height="500.0" onKeyPressed="#handleUserInput" width="500.0" />
-            <Canvas fx:id="uiCanvas" height="500.0" onKeyPressed="#handleUserInput" width="500.0" />
+            <Canvas fx:id="backGroundCanvas" height="300.0" onKeyPressed="#handleUserInput" width="300.0" />
+            <Canvas fx:id="gameCanvas" height="300.0" onKeyPressed="#handleUserInput" width="300.0" />
+            <Canvas fx:id="uiCanvas" height="300.0" onKeyPressed="#handleUserInput" width="300.0" />
          </children>
       </StackPane>
    </center>

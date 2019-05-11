@@ -98,6 +98,16 @@ public abstract class BoardModel implements BoardModels { //TODO could have bett
     }
 
     @Override
+    public boolean isColliding(Sprites s) {
+        for (Sprites sprite : sprites) {
+            if (s.intersects(sprite)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public double getHeight() {
         return height;
     }

@@ -58,7 +58,7 @@ public class SoundPlayer {
         }
         Media media = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); //TODO looping makes the game mess up for some reason
         mediaPlayer.volumeProperty().bind(backgroundMusicVolume);
         mediaPlayer.play();
 

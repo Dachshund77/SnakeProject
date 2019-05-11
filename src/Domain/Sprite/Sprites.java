@@ -46,4 +46,8 @@ public interface Sprites {
      * @param newStatus True or False
      */
     void setIsRemoved(boolean newStatus);
+
+    void setxPosition(double xPosition);
+
+    void setyPosition(double yPosition);
 }

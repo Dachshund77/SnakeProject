@@ -51,10 +51,14 @@ public class BasicGame extends GameModel { //TODO this class might also be in ch
     @Override
     public void spawnNextFood() {
         if (boardModel.getFoods().size() < 1) {
-            double x = boardModel.getRandomX();
-            double y = boardModel.getRandomY();
+            Food food = new Food(0, 0, 10, 10, Color.GREEN, 100, 500);
 
-            Food food = new Food(x, y, 10, 10, Color.GREEN, 100, 500);
+            do {
+                food.setxPosition(boardModel.getRandomX());
+                food.setyPosition(boardModel.getRandomY());
+
+            } while (boardModel.isColliding(food)); //Do while colliding
+
             addSpriteQue(food);
         }
     }
