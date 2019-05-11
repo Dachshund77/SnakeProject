@@ -55,6 +55,10 @@ public class MainController {
      * @param event the event that starts this method.
      */
     public void handleNewStandardGame(ActionEvent event) {
+        if (gameModel != null){
+            gameModel.setGameOver(true);
+        }
+        prepareCanvas();
         gameModel = new BasicGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()),gameCanvas);
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
         gameModel.startGameLoop();
@@ -67,6 +71,10 @@ public class MainController {
      */
     @FXML
     public void handleNewInsaneGame(ActionEvent event) {
+        if (gameModel != null){
+            gameModel.setGameOver(true);
+        }
+        prepareCanvas();
         gameModel = new InsaneGame(new BlankBoard(gameCanvas.getHeight(), gameCanvas.getWidth()),gameCanvas);
         scoreCountLabel.textProperty().bind(gameModel.scoreProperty().asString());
         gameModel.startGameLoop();
@@ -95,11 +103,22 @@ public class MainController {
 
     }
 
+    /**
+     * Opens up the menu for changing the sound options.
+     * @param actionEvent event that started this method
+     * @throws IOException
+     * @see SoundOptionsController
+     */
     @FXML
     public void handleSoundOption(ActionEvent actionEvent) throws IOException {
         SoundOptions soundOptions = new SoundOptions();
         soundOptions.start(new Stage());
     }
 
-
+    /**
+     * Clean up the Canvas an makes sure that it is ready to use.
+     */
+    private void prepareCanvas(){
+        gameCanvas.rotateProperty().set(0);
+    }
 }

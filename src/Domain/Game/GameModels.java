@@ -53,7 +53,7 @@ public interface GameModels {
      * @return True, if the game is over.
      * @see #detectGameEnd()
      */
-    boolean isGameOver();
+    boolean isGameOver(); //TODO Candidate to be deleted later if not needed
 
     /**
      * Helper method to access the score property.
@@ -81,4 +81,10 @@ public interface GameModels {
      * @see Sprites
      */
     void startGameLoop();
+
+    /**
+     * Helper method that set the gameOver flag.
+     * @param newValue boolean of the flag
+     */
+    void setGameOver(boolean newValue);
 }
