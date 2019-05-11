@@ -5,14 +5,19 @@ import Domain.Food.Food;
 import Domain.PlayerEntity.SnakeControl;
 import Domain.PlayerEntity.SnakeHead;
 import Domain.Sound.SoundPlayer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Actual implementation of the GameModels interface.
@@ -47,6 +52,7 @@ public class InsaneGame extends GameModel { //TODO check entire javaDocs for thi
      * {@inheritDoc}
      * <br><br>
      * This implementation will always keep one {@link Food} on the Board.
+     * Also will rotate the canvas with a 10% chance.
      */
     @Override
     public void spawnNextFood() {
@@ -59,10 +65,35 @@ public class InsaneGame extends GameModel { //TODO check entire javaDocs for thi
 
             } while (boardModel.isColliding(food)); //Do while colliding
 
+            Random random = new Random();
+            if (random.nextDouble() < 0.1){
+                rotateCanvas();
+            }
+
             addSpriteQue(food);
 
 
         }
+    }
+
+    /**
+     * Rotates the gameCanvas by 90 degree
+     */
+    private void rotateCanvas(){
+        double oldRotation = gameCanvas.rotateProperty().get();
+        double newRotation = (oldRotation+90)%360;
+
+        //Make a brief animation
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(gameCanvas.rotateProperty(),newRotation))
+        );
+        timeline.play();
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("SoundEffects/Confusion8Bit.wav")).getFile());
+        SoundPlayer.getInstance().playSoundEffect(file);
     }
 }
 

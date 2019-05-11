@@ -40,7 +40,7 @@ public abstract class GameModel implements GameModels {
     private ArrayList<Sprites> addQue = new ArrayList<>();
 
     private long lastNanoTime = System.nanoTime();
-    private Canvas gameCanvas;
+    protected Canvas gameCanvas;
 
     public GameModel(BoardModels boardModel, Canvas gameCanvas) {
         this.boardModel = boardModel;
@@ -53,7 +53,7 @@ public abstract class GameModel implements GameModels {
             @Override
             public void handle(long currentNanoTime) {
                 // ask if the game has ended
-                if (isGameOver()) {
+                if (gameOver) {
                     stop();
                 }
 
@@ -195,7 +195,7 @@ public abstract class GameModel implements GameModels {
      * @return The value of {@link #gameOver} field.
      */
     @Override
-    public boolean isGameOver() {
+    public boolean isGameOver() { //TODO Candidate to be deleted later if not needed
         return gameOver;
     }
 
